@@ -18,7 +18,6 @@ public class MemberService {
 
     public Member getOrCreateMember(final String uuid, final String fcmToken) {
         Assert.hasText(uuid, "'uuid' must not be null, empty or blank");
-        Assert.hasText(fcmToken, "'fcmToken' must not be null, empty or blank");
 
         return memberRepository.findByUuid(uuid)
                 .orElseGet(() -> memberRepository.save(
