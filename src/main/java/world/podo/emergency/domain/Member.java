@@ -41,6 +41,9 @@ public class Member {
     @OneToMany
     private List<Country> countries = new ArrayList<>();
 
+    public static Member from(String uuid) {
+        return of(uuid, null);
+    }
 
     public static Member of(String uuid, String fcmToken) {
         Member member = new Member();
