@@ -22,7 +22,7 @@ public class LoginController {
     ) {
         return ResponseEntity.ok(
                 ApiResponse.data(
-                        loginApplicationService.login(loginRequest.getUuid())
+                        loginApplicationService.login(loginRequest.getUuid(), loginRequest.getFcmToken())
                 )
         );
     }

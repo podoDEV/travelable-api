@@ -15,9 +15,9 @@ public class LoginApplicationService {
     private final MemberAssembler memberAssembler;
 
     @Transactional
-    public LoginResponse login(String uuid) {
+    public LoginResponse login(String uuid, String fcmToken) {
         Assert.hasText(uuid, "'uuid' must not be null, empty or blank");
-        Member member = memberService.getOrCreateMember(uuid);
+        Member member = memberService.getOrCreateMember(uuid, fcmToken);
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setMemberResponse(
                 memberAssembler.toMemberResponse(member)
