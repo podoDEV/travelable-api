@@ -1,6 +1,7 @@
 package world.podo.emergency.ui.web;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.springframework.util.Assert;
 
@@ -9,7 +10,9 @@ import java.util.List;
 
 @Data
 public class ApiResponse<T> {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private final T data;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final List<ErrorResponse> errors;
 
     @JsonCreator

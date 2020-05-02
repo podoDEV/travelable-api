@@ -50,7 +50,7 @@ public class CountryController {
             @PathVariable Long countryId
     ) {
         // TODO: pin
-        return ResponseEntity.ok(ApiResponse.empty());
+        return ResponseEntity.noContent().build();
     }
 
     /**
@@ -62,6 +62,6 @@ public class CountryController {
             @PathVariable Long countryId
     ) {
         // TODO: unpin
-        return ResponseEntity.ok(ApiResponse.empty());
+        return ResponseEntity.noContent().build();
     }
 }
