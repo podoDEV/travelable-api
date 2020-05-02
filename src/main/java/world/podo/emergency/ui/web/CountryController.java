@@ -21,7 +21,7 @@ public class CountryController {
         // TODO: query countries
         return ResponseEntity.ok(
                 ApiResponse.data(
-                        Collections.singletonList(new CountryDetailResponse())
+                        Collections.emptyList()
                 )
         );
     }

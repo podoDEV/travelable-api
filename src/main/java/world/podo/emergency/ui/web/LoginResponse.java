@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class LoginResponse {
+    private String accessToken;
     @JsonProperty("member")
-    private MemberResponse memberResponse;
+    private MemberSimpleResponse memberSimpleResponse;
 }

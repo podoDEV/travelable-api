@@ -20,16 +20,13 @@ public class LoginController {
     public ResponseEntity<ApiResponse<LoginResponse>> login(
             @RequestBody @Valid LoginRequest loginRequest
     ) {
-        return ResponseEntity.ok(
-                ApiResponse.data(
-                        loginApplicationService.login(loginRequest.getUuid())
-                )
-        );
+        // do nothing
+        return null;
     }
 
     @PostMapping("/logout")
     public ResponseEntity logout() {
-        // TODO: logout
-        return ResponseEntity.noContent().build();
+        // do nothing
+        return null;
     }
 }

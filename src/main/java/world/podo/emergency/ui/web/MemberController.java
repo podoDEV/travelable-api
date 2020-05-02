@@ -12,11 +12,11 @@ import java.util.List;
 @RequestMapping("/api/members")
 public class MemberController {
     @GetMapping("/me")
-    public ResponseEntity<ApiResponse<List<MemberResponse>>> getMe() {
+    public ResponseEntity<ApiResponse<List<MemberSimpleResponse>>> getMe() {
         // TODO: get my information
         return ResponseEntity.ok(
                 ApiResponse.data(
-                        Collections.singletonList(new MemberResponse())
+                        Collections.singletonList(new MemberSimpleResponse())
                 )
         );
     }
