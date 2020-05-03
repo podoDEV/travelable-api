@@ -8,4 +8,7 @@ import lombok.Data;
 public class CountryDetailResponse {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
+    private String name;
+    private Boolean pinned;
+    private String contact;
 }

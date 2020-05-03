@@ -4,11 +4,10 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 나라
@@ -36,4 +35,6 @@ public class Country {
     private OffsetDateTime createdAt;
     @LastModifiedDate
     private OffsetDateTime updatedAt;
+    @OneToMany(mappedBy = "country")
+    private List<MemberCountry> memberCountries = new ArrayList<>();
 }

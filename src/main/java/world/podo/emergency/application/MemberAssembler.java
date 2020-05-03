@@ -3,6 +3,7 @@ package world.podo.emergency.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import world.podo.emergency.domain.Member;
+import world.podo.emergency.domain.MemberCountry;
 import world.podo.emergency.ui.web.MemberDetailResponse;
 import world.podo.emergency.ui.web.MemberSimpleResponse;
 
@@ -30,9 +31,10 @@ public class MemberAssembler {
         MemberDetailResponse memberDetailResponse = new MemberDetailResponse();
         memberDetailResponse.setId(member.getMemberId());
         memberDetailResponse.setName(member.getName());
-        memberDetailResponse.setCountryResponses(member.getCountries()
+        memberDetailResponse.setCountrySimpleResponse(member.getMemberCountries()
                 .stream()
-                .map(country -> countryAssembler.toCountryResponse(member, country))
+                .map(MemberCountry::getCountry)
+                .map(country -> countryAssembler.toCountrySimpleResponse(member, country))
                 .collect(toList()));
         return memberDetailResponse;
     }

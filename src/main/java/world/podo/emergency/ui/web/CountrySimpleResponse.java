@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 @Data
-public class CountryResponse {
+public class CountrySimpleResponse {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     private String name;

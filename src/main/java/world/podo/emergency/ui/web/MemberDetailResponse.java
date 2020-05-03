@@ -13,5 +13,5 @@ public class MemberDetailResponse {
     private Long id;
     private String name;
     @JsonProperty("countries")
-    private List<CountryResponse> countryResponses;
+    private List<CountrySimpleResponse> countrySimpleResponse;
 }
