@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import world.podo.emergency.application.BadRequestException;
 import world.podo.emergency.domain.MemberNotFoundException;
+import world.podo.emergency.infrastructure.public_api.PublicApiFailedException;
 import world.podo.emergency.infrastructure.spring.security.PodoAuthenticationToken;
 
 import java.security.Principal;
@@ -27,22 +28,31 @@ public class ApiControllerAdvice {
     @ExceptionHandler(MemberNotFoundException.class)
     public ResponseEntity handleNotFoundException(MemberNotFoundException ex) {
         log.warn("MemberNotFoundException occurred", ex);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound()
+                             .build();
     }
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity handleBadRequestException(BadRequestException ex) {
         log.warn("BadRequestException occurred", ex);
         return ResponseEntity.badRequest()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(ApiResponse.error("badRequest", ex.getMessage()));
+                             .contentType(MediaType.APPLICATION_JSON)
+                             .body(ApiResponse.error("BadRequest", ex.getMessage()));
+    }
+
+    @ExceptionHandler(PublicApiFailedException.class)
+    public ResponseEntity handlePublicApiFailedException(PublicApiFailedException ex) {
+        log.warn("PublicApiFailedException occurred", ex);
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                             .contentType(MediaType.APPLICATION_JSON)
+                             .body(ApiResponse.error("ServiceUnavailable", ex.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleException(Exception ex) {
         log.warn("Exception occurred", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(ApiResponse.error("InternalServerError", ex.getMessage()));
+                             .contentType(MediaType.APPLICATION_JSON)
+                             .body(ApiResponse.error("InternalServerError", ex.getMessage()));
     }
 }
