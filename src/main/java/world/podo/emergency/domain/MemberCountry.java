@@ -6,6 +6,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import java.time.OffsetDateTime;
 
 /**
@@ -32,4 +34,11 @@ public class MemberCountry {
     @LastModifiedDate
     private OffsetDateTime updatedAt;
 
+    @MapsId("countryId")
+    @ManyToOne
+    private Country country;
+
+    @MapsId("memberId")
+    @ManyToOne
+    private Member member;
 }

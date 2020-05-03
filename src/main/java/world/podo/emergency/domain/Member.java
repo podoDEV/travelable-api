@@ -38,8 +38,8 @@ public class Member {
     private OffsetDateTime createdAt;
     @LastModifiedDate
     private OffsetDateTime updatedAt;
-    @OneToMany
-    private List<Country> countries = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<MemberCountry> memberCountries = new ArrayList<>();
 
     public static Member from(String uuid) {
         return of(uuid, null);

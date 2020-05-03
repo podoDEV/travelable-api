@@ -1,27 +1,33 @@
 package world.podo.emergency.ui.web;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+import world.podo.emergency.application.CountryApplicationService;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/countries")
+@RequiredArgsConstructor
 public class CountryController {
+    private final CountryApplicationService countryApplicationService;
+
     /**
-     * 전체 나라 목록을 조회합니다
+     * 나라 목록을 조회합니다
      */
     @GetMapping
-    public ResponseEntity<ApiResponse<List<CountryDetailResponse>>> getCountries(
-            @RequestParam(defaultValue = "false") Boolean pinned,
+    public ResponseEntity<ApiResponse<List<CountrySimpleResponse>>> getCountries(
+            @RequestHeader("Authorization") String authorization,
+            @ApiIgnore @ModelAttribute("memberId") Long memberId,
+            @RequestParam(required = false) Boolean pinned,
             Pageable pageable
     ) {
-        // TODO: query countries
         return ResponseEntity.ok(
                 ApiResponse.data(
-                        Collections.emptyList()
+                        countryApplicationService.getCountries(memberId, pinned, pageable).getContent()
                 )
         );
     }
@@ -31,12 +37,13 @@ public class CountryController {
      */
     @GetMapping("/{countryId}")
     public ResponseEntity<ApiResponse<CountryDetailResponse>> getCountries(
+            @RequestHeader("Authorization") String authorization,
+            @ApiIgnore @ModelAttribute("memberId") Long memberId,
             @PathVariable Long countryId
     ) {
-        // TODO: query country
         return ResponseEntity.ok(
                 ApiResponse.data(
-                        new CountryDetailResponse()
+                        countryApplicationService.getCountry(memberId, countryId)
                 )
         );
     }
