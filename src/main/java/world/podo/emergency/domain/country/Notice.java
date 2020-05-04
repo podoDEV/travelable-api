@@ -3,22 +3,27 @@ package world.podo.emergency.domain.country;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.time.OffsetDateTime;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * 공지사항
  */
 @Entity
 @Getter
-@ToString
-@EqualsAndHashCode(exclude = "country")
+@ToString(exclude = {
+        "country"
+})
+@EqualsAndHashCode(exclude = {
+        "country",
+        "textContent",
+        "htmlContent"
+})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@EntityListeners(AuditingEntityListener.class)
 public class Notice {
     @Id
     @GeneratedValue
@@ -27,12 +32,14 @@ public class Notice {
     private Country country;
     private String providerNoticeId;
     private String title;
+    @Lob
     private String textContent;
+    @Lob
     private String htmlContent;
     @CreatedDate
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
     @LastModifiedDate
-    private OffsetDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     Notice update(
             String providerNoticeId,

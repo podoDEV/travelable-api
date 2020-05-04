@@ -3,11 +3,12 @@ package world.podo.emergency.domain.country;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.Assert;
 import world.podo.emergency.domain.member.MemberCountry;
 
 import javax.persistence.*;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import java.util.List;
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@EntityListeners(AuditingEntityListener.class)
 public class Country {
     @Id
     @GeneratedValue
@@ -44,7 +46,7 @@ public class Country {
     /**
      * 기본 정보
      */
-    @Column(length = 2000)
+    @Lob
     private String description;
     /**
      * 기본 이미지 링크
@@ -58,9 +60,9 @@ public class Country {
     @OneToOne
     private Contact contact;
     @CreatedDate
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
     @LastModifiedDate
-    private OffsetDateTime updatedAt;
+    private LocalDateTime updatedAt;
     @OneToMany(mappedBy = "country")
     private List<MemberCountry> memberCountries = new ArrayList<>();
 
@@ -92,6 +94,13 @@ public class Country {
             this.imageUrl = imageUrl;
         }
         return this;
+    }
+
+    void setContact(Contact contact) {
+        if (this.contact != null) {
+            return;
+        }
+        this.contact = contact;
     }
 
     Country updateContact(

@@ -18,8 +18,7 @@ class SwaggerPageableRequest {
     private Integer page;
 
     @ApiModelProperty(
-            value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
-            example = "&sort=created,asc"
+            value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported."
     )
     private String sort;
 }
