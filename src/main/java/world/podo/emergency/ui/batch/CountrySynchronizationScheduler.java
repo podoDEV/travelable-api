@@ -20,6 +20,6 @@ public class CountrySynchronizationScheduler {
     @Scheduled(cron = "${cron.synchronization.contact}")
     public void executeSynchronizingCountries() {
         List<Country> countries = countrySynchronizationApplicationService.synchronizeCountries();
-        log.info("contacts are synchronized. size:{}", countries.size());
+        log.info("Contacts are synchronized. size:{}", countries.size());
     }
 }

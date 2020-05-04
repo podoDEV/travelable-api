@@ -8,6 +8,7 @@ import world.podo.emergency.domain.DomainService;
 import world.podo.emergency.domain.member.MemberCountry;
 import world.podo.emergency.domain.member.MemberCountryRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @DomainService
@@ -27,6 +28,10 @@ public class CountryService {
             // TODO pinned false
             return Page.empty(pageable);
         }
+    }
+
+    public List<Country> getAllCountries() {
+        return countryRepository.findAll();
     }
 
     public Optional<Country> getCountry(Long countryId) {

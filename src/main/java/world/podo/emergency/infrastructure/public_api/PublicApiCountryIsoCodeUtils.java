@@ -251,7 +251,10 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("프랑스령 폴리네시아", "PYF");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("피지", "FJI");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("핀란드", "FIN");
-        DEFAULT_COUNTRY_ISO_CODE_MAP.put("필리핀", "PHL");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("핏케언 제도", "PCN");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("허드 맥도널드 제도", "HMD");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("헝가리", "HUN");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("홍콩", "HKG");
     }
 
     public String getIsoCode(String name) {

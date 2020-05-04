@@ -13,7 +13,12 @@ public class ContactSynchronizationService {
         return countryService.getCountryByProviderCountryId(contactFetchValue.getId())
                              .map(country -> {
                                  if (country.getContact() == null) {
-                                     contactFactory.create(country);
+                                     contactFactory.create(
+                                             country,
+                                             contactFetchValue.getValue(),
+                                             contactFetchValue.getFirstImageUrl(),
+                                             contactFetchValue.getSecondImageUrl()
+                                     );
                                      return country;
                                  } else {
                                      return country.updateContact(

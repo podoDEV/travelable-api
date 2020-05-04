@@ -9,17 +9,24 @@ import org.springframework.util.Assert;
 class ContactFactory {
     private final ContactRepository contactRepository;
 
-    Contact create(Country country) {
+    Contact create(
+            Country country,
+            String value,
+            String firstImageUrl,
+            String secondImageUrl
+    ) {
         Assert.notNull(country, "'country' must not be null");
 
-        return new Contact(
-                null,
-                country,
-                null,
-                null,
-                null,
-                null,
-                null
+        return contactRepository.save(
+                new Contact(
+                        null,
+                        country,
+                        value,
+                        firstImageUrl,
+                        secondImageUrl,
+                        null,
+                        null
+                )
         );
     }
 }

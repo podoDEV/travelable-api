@@ -18,15 +18,40 @@ import java.time.OffsetDateTime;
 @ToString
 @EqualsAndHashCode(exclude = "country")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Notice {
     @Id
     @GeneratedValue
     private Long noticeId;
     @ManyToOne
     private Country country;
-    private String value;
+    private String providerNoticeId;
+    private String title;
+    private String textContent;
+    private String htmlContent;
     @CreatedDate
     private OffsetDateTime createdAt;
     @LastModifiedDate
     private OffsetDateTime updatedAt;
+
+    Notice update(
+            String providerNoticeId,
+            String title,
+            String textContent,
+            String htmlContent
+    ) {
+        if (!this.providerNoticeId.equals(providerNoticeId)) {
+            return this;
+        }
+        if (title != null) {
+            this.title = title;
+        }
+        if (textContent != null) {
+            this.textContent = textContent;
+        }
+        if (htmlContent != null) {
+            this.htmlContent = htmlContent;
+        }
+        return this;
+    }
 }
