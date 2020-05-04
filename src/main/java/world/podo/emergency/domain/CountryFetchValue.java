@@ -13,11 +13,11 @@ import lombok.Value;
  */
 @Value
 public class CountryFetchValue {
+    private final String id;
     private final String basic;
     private final String continent;
     private final String name;
     private final String englishName;
-    private final String id;
     private final String imageUrl;
     private final String writtenDate;
 }

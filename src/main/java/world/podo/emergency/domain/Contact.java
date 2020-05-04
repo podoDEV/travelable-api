@@ -28,8 +28,33 @@ public class Contact {
      * 연락처 내용
      */
     private String value;
+    /**
+     * 첫번째 이미지 주소
+     */
+    private String firstImageUrl;
+    /**
+     * 두번째 이미지 주소
+     */
+    private String secondImageUrl;
     @CreatedDate
     private OffsetDateTime createdAt;
     @LastModifiedDate
     private OffsetDateTime updatedAt;
+
+    public Contact update(
+            String value,
+            String firstImageUrl,
+            String secondImageUrl
+    ) {
+        if (value != null) {
+            this.value = value;
+        }
+        if (firstImageUrl != null) {
+            this.firstImageUrl = firstImageUrl;
+        }
+        if (secondImageUrl != null) {
+            this.secondImageUrl = secondImageUrl;
+        }
+        return this;
+    }
 }
