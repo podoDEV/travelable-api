@@ -30,8 +30,8 @@ public class CountryService {
         return countryRepository.findById(countryId);
     }
 
-    public Optional<Country> getCountryByCoutryProviderId(String countryProviderId) {
-        Assert.notNull(countryProviderId, "'countryProviderId' must not be null");
-        return countryRepository.findByProviderCountryId(countryProviderId);
+    public Optional<Country> getCountryByProviderCountryId(String providerCountryId) {
+        Assert.notNull(providerCountryId, "'providerCountryId' must not be null");
+        return countryRepository.findByProviderCountryId(providerCountryId);
     }
 }

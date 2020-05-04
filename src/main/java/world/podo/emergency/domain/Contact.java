@@ -18,6 +18,7 @@ import java.time.OffsetDateTime;
 @ToString
 @EqualsAndHashCode(exclude = "country")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Contact {
     @Id
     @GeneratedValue
