@@ -3,6 +3,9 @@ package world.podo.emergency.domain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.Assert;
+
+import java.util.Optional;
 
 @DomainService
 @RequiredArgsConstructor
@@ -15,15 +18,20 @@ public class CountryService {
             return countryRepository.findAll(pageable);
         }
         if (pinned) {
-            return memberCountryRepository.findByMember_memberId(memberId, pageable).map(MemberCountry::getCountry);
+            return memberCountryRepository.findByMember_memberId(memberId, pageable)
+                                          .map(MemberCountry::getCountry);
         } else {
             // TODO pinned false
             return Page.empty(pageable);
         }
     }
 
-    public Country getCountry(Long countryId) {
-        return countryRepository.findById(countryId)
-                .orElseThrow(CountryNotFoundException::new);
+    public Optional<Country> getCountry(Long countryId) {
+        return countryRepository.findById(countryId);
+    }
+
+    public Optional<Country> getCountryByCoutryProviderId(String countryProviderId) {
+        Assert.notNull(countryProviderId, "'countryProviderId' must not be null");
+        return countryRepository.findByProviderCountryId(countryProviderId);
     }
 }

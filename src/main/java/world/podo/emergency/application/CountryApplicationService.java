@@ -25,7 +25,7 @@ public class CountryApplicationService {
         try {
             Member member = memberService.getMember(memberId);
             return countryService.getCountries(memberId, pinned, pageable)
-                    .map(country -> countryAssembler.toCountrySimpleResponse(member, country));
+                                 .map(country -> countryAssembler.toCountrySimpleResponse(member, country));
         } catch (MemberNotFoundException ex) {
             throw new BadRequestException("Failed to get countries", ex);
         }
@@ -37,7 +37,8 @@ public class CountryApplicationService {
 
         try {
             Member member = memberService.getMember(memberId);
-            Country country = countryService.getCountry(countryId);
+            Country country = countryService.getCountry(countryId)
+                                            .orElseThrow(CountryNotFoundException::new);
             return countryAssembler.toCountryDetailResponse(member, country);
         } catch (MemberNotFoundException | CountryNotFoundException ex) {
             throw new BadRequestException("Failed to get country", ex);

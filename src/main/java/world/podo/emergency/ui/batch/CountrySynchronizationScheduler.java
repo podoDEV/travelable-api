@@ -1,0 +1,25 @@
+package world.podo.emergency.ui.batch;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import world.podo.emergency.application.SynchronizationApplicationService;
+import world.podo.emergency.domain.Country;
+
+import java.util.List;
+
+@Profile("batch")
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class CountrySynchronizationScheduler {
+    private final SynchronizationApplicationService synchronizationApplicationService;
+
+    @Scheduled(cron = "${cron.synchronization.country}")
+    public void executeSynchronizingCountries() {
+        List<Country> countries = synchronizationApplicationService.synchronizeCountries();
+        log.info("countries are synchronized. size:{}", countries.size());
+    }
+}
