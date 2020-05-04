@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 import world.podo.emergency.application.CountryApplicationService;
+import world.podo.emergency.domain.CountryNotFoundException;
+import world.podo.emergency.domain.MemberNotFoundException;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class CountryController {
     private final CountryApplicationService countryApplicationService;
 
     /**
-     * 나라 목록을 조회합니다
+     * 국가 목록을 조회합니다
      */
     @GetMapping
     public ResponseEntity<ApiResponse<List<CountrySimpleResponse>>> getCountries(
@@ -25,15 +27,20 @@ public class CountryController {
             @RequestParam(required = false) Boolean pinned,
             Pageable pageable
     ) {
-        return ResponseEntity.ok(
-                ApiResponse.data(
-                        countryApplicationService.getCountries(memberId, pinned, pageable).getContent()
-                )
-        );
+        try {
+            return ResponseEntity.ok(
+                    ApiResponse.data(
+                            countryApplicationService.getCountries(memberId, pinned, pageable)
+                                                     .getContent()
+                    )
+            );
+        } catch (MemberNotFoundException ex) {
+            throw new BadRequestException("Failed to get countries", ex);
+        }
     }
 
     /**
-     * 나라 1개를 조회합니다
+     * 국가 1개를 조회합니다
      */
     @GetMapping("/{countryId}")
     public ResponseEntity<ApiResponse<CountryDetailResponse>> getCountries(
@@ -41,11 +48,15 @@ public class CountryController {
             @ApiIgnore @ModelAttribute("memberId") Long memberId,
             @PathVariable Long countryId
     ) {
-        return ResponseEntity.ok(
-                ApiResponse.data(
-                        countryApplicationService.getCountry(memberId, countryId)
-                )
-        );
+        try {
+            return ResponseEntity.ok(
+                    ApiResponse.data(
+                            countryApplicationService.getCountry(memberId, countryId)
+                    )
+            );
+        } catch (MemberNotFoundException | CountryNotFoundException ex) {
+            throw new BadRequestException("Failed to get country", ex);
+        }
     }
 
     /**
@@ -57,7 +68,8 @@ public class CountryController {
             @PathVariable Long countryId
     ) {
         // TODO: pin
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent()
+                             .build();
     }
 
     /**
@@ -69,6 +81,7 @@ public class CountryController {
             @PathVariable Long countryId
     ) {
         // TODO: unpin
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent()
+                             .build();
     }
 }

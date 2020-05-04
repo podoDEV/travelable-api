@@ -22,26 +22,18 @@ public class CountryApplicationService {
         Assert.notNull(memberId, "'memberId' must not be null");
         Assert.notNull(pageable, "'pageable' must not be null");
 
-        try {
-            Member member = memberService.getMember(memberId);
-            return countryService.getCountries(memberId, pinned, pageable)
-                                 .map(country -> countryAssembler.toCountrySimpleResponse(member, country));
-        } catch (MemberNotFoundException ex) {
-            throw new BadRequestException("Failed to get countries", ex);
-        }
+        Member member = memberService.getMember(memberId);
+        return countryService.getCountries(memberId, pinned, pageable)
+                             .map(country -> countryAssembler.toCountrySimpleResponse(member, country));
     }
 
     public CountryDetailResponse getCountry(Long memberId, Long countryId) {
         Assert.notNull(memberId, "'memberId' must not be null");
         Assert.notNull(countryId, "'countryId' must not be null");
 
-        try {
-            Member member = memberService.getMember(memberId);
-            Country country = countryService.getCountry(countryId)
-                                            .orElseThrow(CountryNotFoundException::new);
-            return countryAssembler.toCountryDetailResponse(member, country);
-        } catch (MemberNotFoundException | CountryNotFoundException ex) {
-            throw new BadRequestException("Failed to get country", ex);
-        }
+        Member member = memberService.getMember(memberId);
+        Country country = countryService.getCountry(countryId)
+                                        .orElseThrow(CountryNotFoundException::new);
+        return countryAssembler.toCountryDetailResponse(member, country);
     }
 }
