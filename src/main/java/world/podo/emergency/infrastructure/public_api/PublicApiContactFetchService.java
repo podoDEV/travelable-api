@@ -66,11 +66,11 @@ public class PublicApiContactFetchService implements ContactFetchService {
             return null;
         }
         return new ContactFetchValueImpl(
-                PublicApiUtils.get(contactFetchMap, "id"),
-                PublicApiUtils.get(contactFetchMap, "contact"),
-                PublicApiUtils.get(contactFetchMap, "imgUrl"),
-                PublicApiUtils.get(contactFetchMap, "imgUrl2"),
-                PublicApiUtils.get(contactFetchMap, "wrtDt")
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.ID),
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.VALUE),
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.FIRST_IMAGE_URL),
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.SECOND_IMAGE_URL),
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.WRITTEN_DATE)
         );
     }
 }

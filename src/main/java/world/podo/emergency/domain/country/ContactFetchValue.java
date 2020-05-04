@@ -1,7 +1,7 @@
 package world.podo.emergency.domain.country;
 
 public interface ContactFetchValue {
-    String getProviderCountryId();
+    String getId();
 
     String getValue();
 

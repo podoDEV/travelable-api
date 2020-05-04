@@ -67,13 +67,13 @@ public class PublicApiCountryFetchService implements CountryFetchService {
             return null;
         }
         return new CountryFetchValueImpl(
-                PublicApiUtils.get(countryFetchMap, "id"),
-                PublicApiUtils.get(countryFetchMap, "basic"),
-                PublicApiUtils.get(countryFetchMap, "continent"),
-                PublicApiUtils.get(countryFetchMap, "countryName"),
-                PublicApiUtils.get(countryFetchMap, "countryEnName"),
-                PublicApiUtils.get(countryFetchMap, "imgUrl"),
-                PublicApiUtils.get(countryFetchMap, "wrtDt")
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.ID),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.BASIC),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.CONTINENT),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.NAME),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.ENGLISH_NAME),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.IMAGE_URL),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.WRITTEN_DATE)
         );
     }
 }

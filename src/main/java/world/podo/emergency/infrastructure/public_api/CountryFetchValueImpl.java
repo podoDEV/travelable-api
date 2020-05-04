@@ -1,6 +1,7 @@
 package world.podo.emergency.infrastructure.public_api;
 
 import lombok.Value;
+import world.podo.emergency.domain.FieldNameSupport;
 import world.podo.emergency.domain.country.CountryFetchValue;
 
 /**
@@ -21,4 +22,25 @@ class CountryFetchValueImpl implements CountryFetchValue {
     private final String englishName;
     private final String imageUrl;
     private final String writtenDate;
+
+    public enum FieldName implements FieldNameSupport {
+        ID("id"),
+        BASIC("basic"),
+        CONTINENT("continent"),
+        NAME("countryName"),
+        ENGLISH_NAME("countryEnName"),
+        IMAGE_URL("imgUrl"),
+        WRITTEN_DATE("wrtDt");
+
+        private final String value;
+
+        FieldName(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String getFieldName() {
+            return value;
+        }
+    }
 }

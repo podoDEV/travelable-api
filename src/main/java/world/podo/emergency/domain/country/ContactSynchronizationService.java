@@ -10,7 +10,7 @@ public class ContactSynchronizationService {
     private final ContactFactory contactFactory;
 
     public Contact synchronize(ContactFetchValue contactFetchValue) {
-        return countryService.getCountryByProviderCountryId(contactFetchValue.getProviderCountryId())
+        return countryService.getCountryByProviderCountryId(contactFetchValue.getId())
                              .map(country -> {
                                  if (country.getContact() == null) {
                                      contactFactory.create(country);
