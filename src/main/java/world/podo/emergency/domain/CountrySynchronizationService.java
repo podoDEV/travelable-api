@@ -9,7 +9,7 @@ public class CountrySynchronizationService {
     private final CountryFactory countryFactory;
 
     public Country synchronize(CountryFetchValue countryFetchValue) {
-        return countryService.getCountryByCoutryProviderId(countryFetchValue.getId())
+        return countryService.getCountryByProviderCountryId(countryFetchValue.getId())
                              .map(country -> country.update(
                                      countryFetchValue.getId(),
                                      countryFetchValue.getName(),

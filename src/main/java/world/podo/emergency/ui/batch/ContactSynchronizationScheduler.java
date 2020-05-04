@@ -14,12 +14,12 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CountrySynchronizationScheduler {
+public class ContactSynchronizationScheduler {
     private final CountrySynchronizationApplicationService countrySynchronizationApplicationService;
 
-    @Scheduled(cron = "${cron.synchronization.contact}")
+    @Scheduled(cron = "${cron.synchronization.country}")
     public void executeSynchronizingCountries() {
         List<Country> countries = countrySynchronizationApplicationService.synchronizeCountries();
-        log.info("contacts are synchronized. size:{}", countries.size());
+        log.info("countries are synchronized. size:{}", countries.size());
     }
 }

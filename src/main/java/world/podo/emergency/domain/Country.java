@@ -92,4 +92,15 @@ public class Country {
         }
         return this;
     }
+
+    public Country updateContact(
+            String value,
+            String firstImageUrl,
+            String secondImageUrl
+    ) {
+        if (contact != null) {
+            contact.update(value, firstImageUrl, secondImageUrl);
+        }
+        return this;
+    }
 }

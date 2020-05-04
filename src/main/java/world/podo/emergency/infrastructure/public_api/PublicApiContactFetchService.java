@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import world.podo.emergency.domain.CountryFetchService;
-import world.podo.emergency.domain.CountryFetchValue;
+import world.podo.emergency.domain.ContactFetchService;
+import world.podo.emergency.domain.ContactFetchValue;
 
 import java.net.URI;
 import java.util.List;
@@ -19,25 +19,24 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class PublicApiCountryFetchService implements CountryFetchService {
+public class PublicApiContactFetchService implements ContactFetchService {
     private final RestTemplate publicApiRestTemplate;
     private final String publicApiHost;
-    private final String publicApiCountryListPath;
+    private final String publicApiContactListPath;
 
-    public PublicApiCountryFetchService(
+    public PublicApiContactFetchService(
             @Qualifier("publicApiRestTemplate") RestTemplate publicApiRestTemplate,
             @Value("${public.api.host}") String publicApiHost,
-            @Value("${public.api.path.country-basic-list}") String publicApiCountryBasicListPath
-    ) {
+            @Value("${public.api.path.contact-list}") String publicApiContactListPath) {
         this.publicApiRestTemplate = publicApiRestTemplate;
         this.publicApiHost = publicApiHost;
-        this.publicApiCountryListPath = publicApiCountryBasicListPath;
+        this.publicApiContactListPath = publicApiContactListPath;
     }
 
     @Override
-    public List<CountryFetchValue> fetch() {
+    public List<ContactFetchValue> fetch() {
         URI requestUrl = UriComponentsBuilder.fromHttpUrl(publicApiHost)
-                                             .path(publicApiCountryListPath)
+                                             .path(publicApiContactListPath)
                                              .queryParams(PublicApiUtils.createQueryParams())
                                              .build(true)
                                              .toUri();
@@ -46,34 +45,32 @@ public class PublicApiCountryFetchService implements CountryFetchService {
         );
         if (!responseEntity.getStatusCode()
                            .is2xxSuccessful() || responseEntity.getBody() == null) {
-            log.error("Failed to get countries. statusCode:" + responseEntity.getStatusCode());
-            throw new CountryApiFailedException("Failed to get countries. statusCode:" + responseEntity.getStatusCode());
+            log.error("Failed to get contacts. statusCode:" + responseEntity.getStatusCode());
+            throw new ContactApiFailedException("Failed to get contacts. statusCode:" + responseEntity.getStatusCode());
         }
         return this.resolve(responseEntity.getBody());
     }
 
-    private List<CountryFetchValue> resolve(Map resultMap) {
+    private List<ContactFetchValue> resolve(Map resultMap) {
         Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
         Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
         Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
         List<Map<String, Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
         return itemList.stream()
-                       .map(this::toCountryFetchValue)
+                       .map(this::toContactFetchValue)
                        .collect(Collectors.toList());
     }
 
-    private CountryFetchValue toCountryFetchValue(Map<String, Object> countryFetchMap) {
-        if (countryFetchMap == null) {
+    private ContactFetchValue toContactFetchValue(Map<String, Object> contactFetchMap) {
+        if (contactFetchMap == null) {
             return null;
         }
-        return new CountryFetchValue(
-                PublicApiUtils.get(countryFetchMap, "id"),
-                PublicApiUtils.get(countryFetchMap, "basic"),
-                PublicApiUtils.get(countryFetchMap, "continent"),
-                PublicApiUtils.get(countryFetchMap, "countryName"),
-                PublicApiUtils.get(countryFetchMap, "countryEnName"),
-                PublicApiUtils.get(countryFetchMap, "imgUrl"),
-                PublicApiUtils.get(countryFetchMap, "wrtDt")
+        return new ContactFetchValue(
+                PublicApiUtils.get(contactFetchMap, "id"),
+                PublicApiUtils.get(contactFetchMap, "contact"),
+                PublicApiUtils.get(contactFetchMap, "imgUrl"),
+                PublicApiUtils.get(contactFetchMap, "imgUrl2"),
+                PublicApiUtils.get(contactFetchMap, "wrtDt")
         );
     }
 }
