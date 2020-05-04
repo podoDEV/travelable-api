@@ -1,6 +1,8 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.infrastructure.public_api;
 
 import lombok.Value;
+import world.podo.emergency.domain.FieldNameSupport;
+import world.podo.emergency.domain.country.CountryFetchValue;
 
 /**
  * "basic": "<div>ㅇ 국명 : 가나공화국 (Republic of Ghana)<br>\r\nㅇ 수도 : 아크라(Accra) - 인구 227만명 (2018년)<br>\r\n<p style=\"margin-left: 20px; margin-right: 20px;\">※ The Greater Accra Metropolitan Area(GAMA) : 인구 약 400만명 (2018)</p>\r\nㅇ 인구 : 3,028만명 (2019년)<br>\r\nㅇ 면적 : 238,539㎢ (한반도의 1.1배)<br>\r\nㅇ 시간대 : GMT (우리나라보다 9시간 느림)<br>\r\nㅇ 언어 : 영어(공용어), 토착어(Twi어, Ewe어 등)<br>\r\nㅇ 종교 : 기독교(71%), 이슬람교(18.6%), 토속 종교(8.5%) 등</div>",
@@ -12,7 +14,7 @@ import lombok.Value;
  * "wrtDt": "2014-08-04"
  */
 @Value
-public class CountryFetchValue {
+class CountryFetchValueImpl implements CountryFetchValue {
     private final String id;
     private final String basic;
     private final String continent;
@@ -20,4 +22,25 @@ public class CountryFetchValue {
     private final String englishName;
     private final String imageUrl;
     private final String writtenDate;
+
+    public enum FieldName implements FieldNameSupport {
+        ID("id"),
+        BASIC("basic"),
+        CONTINENT("continent"),
+        NAME("countryName"),
+        ENGLISH_NAME("countryEnName"),
+        IMAGE_URL("imgUrl"),
+        WRITTEN_DATE("wrtDt");
+
+        private final String value;
+
+        FieldName(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String getFieldName() {
+            return value;
+        }
+    }
 }

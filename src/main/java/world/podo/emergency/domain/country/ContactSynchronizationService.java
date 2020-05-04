@@ -1,6 +1,7 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.country;
 
 import lombok.RequiredArgsConstructor;
+import world.podo.emergency.domain.DomainService;
 
 @DomainService
 @RequiredArgsConstructor
@@ -9,10 +10,15 @@ public class ContactSynchronizationService {
     private final ContactFactory contactFactory;
 
     public Contact synchronize(ContactFetchValue contactFetchValue) {
-        return countryService.getCountryByProviderCountryId(contactFetchValue.getProviderCountryId())
+        return countryService.getCountryByProviderCountryId(contactFetchValue.getId())
                              .map(country -> {
                                  if (country.getContact() == null) {
-                                     contactFactory.create(country);
+                                     contactFactory.create(
+                                             country,
+                                             contactFetchValue.getValue(),
+                                             contactFetchValue.getFirstImageUrl(),
+                                             contactFetchValue.getSecondImageUrl()
+                                     );
                                      return country;
                                  } else {
                                      return country.updateContact(

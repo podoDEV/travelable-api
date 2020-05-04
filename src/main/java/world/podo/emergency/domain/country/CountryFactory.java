@@ -1,4 +1,4 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.country;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 @Component
 @RequiredArgsConstructor
-public class CountryFactory {
+class CountryFactory {
     private final CountryRepository countryRepository;
 
-    public Country create(CountryFetchValue countryFetchValue) {
+    Country create(CountryFetchValue countryFetchValue) {
         return countryRepository.save(
                 new Country(
                         null,

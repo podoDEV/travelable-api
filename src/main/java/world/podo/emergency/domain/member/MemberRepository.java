@@ -1,4 +1,4 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

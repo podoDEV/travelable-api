@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import world.podo.emergency.domain.CountryFetchService;
-import world.podo.emergency.domain.CountryFetchValue;
+import world.podo.emergency.domain.country.CountryFetchService;
+import world.podo.emergency.domain.country.CountryFetchValue;
 
 import java.net.URI;
 import java.util.List;
@@ -66,14 +66,14 @@ public class PublicApiCountryFetchService implements CountryFetchService {
         if (countryFetchMap == null) {
             return null;
         }
-        return new CountryFetchValue(
-                PublicApiUtils.get(countryFetchMap, "id"),
-                PublicApiUtils.get(countryFetchMap, "basic"),
-                PublicApiUtils.get(countryFetchMap, "continent"),
-                PublicApiUtils.get(countryFetchMap, "countryName"),
-                PublicApiUtils.get(countryFetchMap, "countryEnName"),
-                PublicApiUtils.get(countryFetchMap, "imgUrl"),
-                PublicApiUtils.get(countryFetchMap, "wrtDt")
+        return new CountryFetchValueImpl(
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.ID),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.BASIC),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.CONTINENT),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.NAME),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.ENGLISH_NAME),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.IMAGE_URL),
+                PublicApiUtils.get(countryFetchMap, CountryFetchValueImpl.FieldName.WRITTEN_DATE)
         );
     }
 }

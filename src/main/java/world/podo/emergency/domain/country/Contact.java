@@ -1,4 +1,4 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.country;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -42,7 +42,7 @@ public class Contact {
     @LastModifiedDate
     private OffsetDateTime updatedAt;
 
-    public Contact update(
+    Contact update(
             String value,
             String firstImageUrl,
             String secondImageUrl

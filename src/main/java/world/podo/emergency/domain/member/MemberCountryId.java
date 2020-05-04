@@ -1,7 +1,8 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.member;
 
 import lombok.*;
 import org.springframework.util.Assert;
+import world.podo.emergency.domain.country.Country;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import world.podo.emergency.domain.ContactFetchService;
-import world.podo.emergency.domain.ContactFetchValue;
+import world.podo.emergency.domain.country.ContactFetchService;
+import world.podo.emergency.domain.country.ContactFetchValue;
 
 import java.net.URI;
 import java.util.List;
@@ -65,12 +65,12 @@ public class PublicApiContactFetchService implements ContactFetchService {
         if (contactFetchMap == null) {
             return null;
         }
-        return new ContactFetchValue(
-                PublicApiUtils.get(contactFetchMap, "id"),
-                PublicApiUtils.get(contactFetchMap, "contact"),
-                PublicApiUtils.get(contactFetchMap, "imgUrl"),
-                PublicApiUtils.get(contactFetchMap, "imgUrl2"),
-                PublicApiUtils.get(contactFetchMap, "wrtDt")
+        return new ContactFetchValueImpl(
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.ID),
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.VALUE),
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.FIRST_IMAGE_URL),
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.SECOND_IMAGE_URL),
+                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.WRITTEN_DATE)
         );
     }
 }

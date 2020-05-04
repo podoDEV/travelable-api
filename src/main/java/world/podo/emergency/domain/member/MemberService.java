@@ -1,7 +1,8 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.Assert;
+import world.podo.emergency.domain.DomainService;
 
 @DomainService
 @RequiredArgsConstructor

@@ -7,8 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import world.podo.emergency.application.BadRequestException;
-import world.podo.emergency.domain.MemberNotFoundException;
+import world.podo.emergency.domain.member.MemberNotFoundException;
 import world.podo.emergency.infrastructure.public_api.PublicApiFailedException;
 import world.podo.emergency.infrastructure.spring.security.PodoAuthenticationToken;
 

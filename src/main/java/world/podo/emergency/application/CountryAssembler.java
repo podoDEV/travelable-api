@@ -2,7 +2,11 @@ package world.podo.emergency.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import world.podo.emergency.domain.*;
+import world.podo.emergency.domain.country.Contact;
+import world.podo.emergency.domain.country.Country;
+import world.podo.emergency.domain.member.Member;
+import world.podo.emergency.domain.member.MemberCountryId;
+import world.podo.emergency.domain.member.MemberCountryRepository;
 import world.podo.emergency.ui.web.CountryDetailResponse;
 import world.podo.emergency.ui.web.CountrySimpleResponse;
 
@@ -10,10 +14,10 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class CountryAssembler {
+class CountryAssembler {
     private final MemberCountryRepository memberCountryRepository;
 
-    public CountrySimpleResponse toCountrySimpleResponse(Member member, Country country) {
+    CountrySimpleResponse toCountrySimpleResponse(Member member, Country country) {
         if (country == null) {
             return null;
         }
@@ -24,7 +28,7 @@ public class CountryAssembler {
         return countrySimpleResponse;
     }
 
-    public CountryDetailResponse toCountryDetailResponse(Member member, Country country) {
+    CountryDetailResponse toCountryDetailResponse(Member member, Country country) {
         if (country == null) {
             return null;
         }

@@ -1,9 +1,10 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.country;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.util.Assert;
+import world.podo.emergency.domain.member.MemberCountry;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -63,7 +64,7 @@ public class Country {
     @OneToMany(mappedBy = "country")
     private List<MemberCountry> memberCountries = new ArrayList<>();
 
-    public Country update(
+    Country update(
             String providerCountryId,
             String name,
             String englishName,
@@ -93,7 +94,7 @@ public class Country {
         return this;
     }
 
-    public Country updateContact(
+    Country updateContact(
             String value,
             String firstImageUrl,
             String secondImageUrl

@@ -1,4 +1,4 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.member;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -41,7 +41,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<MemberCountry> memberCountries = new ArrayList<>();
 
-    public static Member from(String uuid) {
+    static Member from(String uuid) {
         return of(uuid, null);
     }
 
