@@ -65,7 +65,7 @@ public class PublicApiContactFetchService implements ContactFetchService {
         if (contactFetchMap == null) {
             return null;
         }
-        return new ContactFetchValue(
+        return new ContactFetchValueImpl(
                 PublicApiUtils.get(contactFetchMap, "id"),
                 PublicApiUtils.get(contactFetchMap, "contact"),
                 PublicApiUtils.get(contactFetchMap, "imgUrl"),

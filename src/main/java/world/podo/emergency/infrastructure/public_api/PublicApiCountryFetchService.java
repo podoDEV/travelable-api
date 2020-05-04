@@ -66,7 +66,7 @@ public class PublicApiCountryFetchService implements CountryFetchService {
         if (countryFetchMap == null) {
             return null;
         }
-        return new CountryFetchValue(
+        return new CountryFetchValueImpl(
                 PublicApiUtils.get(countryFetchMap, "id"),
                 PublicApiUtils.get(countryFetchMap, "basic"),
                 PublicApiUtils.get(countryFetchMap, "continent"),
