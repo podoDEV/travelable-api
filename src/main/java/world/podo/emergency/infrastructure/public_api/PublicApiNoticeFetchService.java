@@ -14,6 +14,7 @@ import world.podo.emergency.domain.country.NoticeFetchService;
 import world.podo.emergency.domain.country.NoticeFetchSimpleValue;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -59,13 +60,18 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
     }
 
     private List<NoticeFetchSimpleValue> resolveSimpleValue(Map resultMap) {
-        Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
-        Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
-        Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
-        List<Map<String, Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
-        return itemList.stream()
-                       .map(this::toNoticeFetchSimpleValue)
-                       .collect(Collectors.toList());
+        try {
+            Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
+            Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
+            Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
+            List<Map<String, Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
+            return itemList.stream()
+                           .map(this::toNoticeFetchSimpleValue)
+                           .collect(Collectors.toList());
+        } catch (ClassCastException ex) {
+            log.error("Failed to parse result. result:{}", resultMap, ex);
+            return Collections.emptyList();
+        }
     }
 
     private NoticeFetchSimpleValue toNoticeFetchSimpleValue(Map<String, Object> noticeFetchMap) {
@@ -100,13 +106,19 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
     }
 
     private NoticeFetchDetailValue resolveDetailValue(Map resultMap) {
-        Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
-        Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
-        Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
-        Map<String, Object> item = (Map<String, Object>) itemsMap.get("item");
-        return Optional.ofNullable(item)
-                       .map(this::toNoticeFetchDetailValue)
-                       .orElse(null);
+        try {
+            Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
+            Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
+            Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
+            Map<String, Object> item = (Map<String, Object>) itemsMap.get("item");
+            return Optional.ofNullable(item)
+                           .map(this::toNoticeFetchDetailValue)
+                           .orElse(null);
+
+        } catch (ClassCastException ex) {
+            log.error("Failed to parse result. result:{}", resultMap, ex);
+            return null;
+        }
     }
 
     private NoticeFetchDetailValue toNoticeFetchDetailValue(Map<String, Object> noticeFetchMap) {

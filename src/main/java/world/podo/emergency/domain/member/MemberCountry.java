@@ -3,12 +3,11 @@ package world.podo.emergency.domain.member;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import world.podo.emergency.domain.country.Country;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 /**
@@ -16,9 +15,16 @@ import java.time.OffsetDateTime;
  */
 @Entity
 @Getter
-@ToString
-@EqualsAndHashCode
+@ToString(exclude = {
+        "country",
+        "member"
+})
+@EqualsAndHashCode(exclude = {
+        "country",
+        "member"
+})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class MemberCountry {
     @EmbeddedId
     private MemberCountryId memberCountryId;
@@ -31,9 +37,9 @@ public class MemberCountry {
      */
     private OffsetDateTime endedAt;
     @CreatedDate
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
     @LastModifiedDate
-    private OffsetDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     @MapsId("countryId")
     @ManyToOne

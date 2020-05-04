@@ -3,12 +3,10 @@ package world.podo.emergency.domain.country;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import java.time.OffsetDateTime;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * 연락처
@@ -19,6 +17,7 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(exclude = "country")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@EntityListeners(AuditingEntityListener.class)
 public class Contact {
     @Id
     @GeneratedValue
@@ -28,6 +27,7 @@ public class Contact {
     /**
      * 연락처 내용
      */
+    @Lob
     private String value;
     /**
      * 첫번째 이미지 주소
@@ -38,9 +38,9 @@ public class Contact {
      */
     private String secondImageUrl;
     @CreatedDate
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
     @LastModifiedDate
-    private OffsetDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     Contact update(
             String value,
