@@ -48,8 +48,8 @@ public class PublicApiCountryFetchService implements CountryFetchService {
         );
         if (!responseEntity.getStatusCode()
                            .is2xxSuccessful() || responseEntity.getBody() == null) {
-            log.error("Failed to get current weather. statusCode:" + responseEntity.getStatusCode());
-            throw new PublicApiFailedException("Failed to get current weather. statusCode:" + responseEntity.getStatusCode());
+            log.error("Failed to get countries. statusCode:" + responseEntity.getStatusCode());
+            throw new PublicApiFailedException("Failed to get countries. statusCode:" + responseEntity.getStatusCode());
         }
         return this.resolve(responseEntity.getBody());
     }

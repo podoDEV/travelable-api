@@ -42,7 +42,7 @@ public class ApiControllerAdvice {
 
     @ExceptionHandler(PublicApiFailedException.class)
     public ResponseEntity handlePublicApiFailedException(PublicApiFailedException ex) {
-        log.warn("PublicApiFailedException occurred", ex);
+        log.error("PublicApiFailedException occurred", ex);
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
                              .contentType(MediaType.APPLICATION_JSON)
                              .body(ApiResponse.error("ServiceUnavailable", ex.getMessage()));
@@ -50,7 +50,7 @@ public class ApiControllerAdvice {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleException(Exception ex) {
-        log.warn("Exception occurred", ex);
+        log.error("Exception occurred", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                              .contentType(MediaType.APPLICATION_JSON)
                              .body(ApiResponse.error("InternalServerError", ex.getMessage()));
