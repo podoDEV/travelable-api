@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import world.podo.emergency.domain.Member;
-import world.podo.emergency.domain.MemberService;
+import world.podo.emergency.domain.member.Member;
+import world.podo.emergency.domain.member.MemberService;
 
 @Service
 @RequiredArgsConstructor

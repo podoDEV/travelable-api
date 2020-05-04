@@ -1,8 +1,9 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.member;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import world.podo.emergency.domain.country.Country;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

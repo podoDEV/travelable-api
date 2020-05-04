@@ -1,6 +1,7 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.country;
 
 import lombok.RequiredArgsConstructor;
+import world.podo.emergency.domain.DomainService;
 
 @DomainService
 @RequiredArgsConstructor

@@ -2,8 +2,8 @@ package world.podo.emergency.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import world.podo.emergency.domain.Member;
-import world.podo.emergency.domain.MemberCountry;
+import world.podo.emergency.domain.member.Member;
+import world.podo.emergency.domain.member.MemberCountry;
 import world.podo.emergency.ui.web.MemberDetailResponse;
 import world.podo.emergency.ui.web.MemberSimpleResponse;
 

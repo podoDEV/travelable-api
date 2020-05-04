@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import world.podo.emergency.domain.Contact;
-import world.podo.emergency.domain.ContactFetchService;
-import world.podo.emergency.domain.ContactSynchronizationService;
-import world.podo.emergency.domain.CountryNotFoundException;
+import world.podo.emergency.domain.country.Contact;
+import world.podo.emergency.domain.country.ContactFetchService;
+import world.podo.emergency.domain.country.ContactSynchronizationService;
+import world.podo.emergency.domain.country.CountryNotFoundException;
 
 import java.util.List;
 import java.util.Objects;

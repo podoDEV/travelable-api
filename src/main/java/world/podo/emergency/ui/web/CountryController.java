@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 import world.podo.emergency.application.CountryApplicationService;
-import world.podo.emergency.domain.CountryNotFoundException;
-import world.podo.emergency.domain.MemberNotFoundException;
+import world.podo.emergency.domain.country.CountryNotFoundException;
+import world.podo.emergency.domain.member.MemberNotFoundException;
 
 import java.util.List;
 

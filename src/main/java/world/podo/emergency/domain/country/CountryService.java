@@ -1,9 +1,12 @@
-package world.podo.emergency.domain;
+package world.podo.emergency.domain.country;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.Assert;
+import world.podo.emergency.domain.DomainService;
+import world.podo.emergency.domain.member.MemberCountry;
+import world.podo.emergency.domain.member.MemberCountryRepository;
 
 import java.util.Optional;
 
@@ -30,7 +33,7 @@ public class CountryService {
         return countryRepository.findById(countryId);
     }
 
-    public Optional<Country> getCountryByProviderCountryId(String providerCountryId) {
+    Optional<Country> getCountryByProviderCountryId(String providerCountryId) {
         Assert.notNull(providerCountryId, "'providerCountryId' must not be null");
         return countryRepository.findByProviderCountryId(providerCountryId);
     }

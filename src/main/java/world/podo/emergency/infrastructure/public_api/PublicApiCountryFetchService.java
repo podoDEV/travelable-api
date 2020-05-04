@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import world.podo.emergency.domain.CountryFetchService;
-import world.podo.emergency.domain.CountryFetchValue;
+import world.podo.emergency.domain.country.CountryFetchService;
+import world.podo.emergency.domain.country.CountryFetchValue;
 
 import java.net.URI;
 import java.util.List;
