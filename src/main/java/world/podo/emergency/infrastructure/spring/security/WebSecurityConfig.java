@@ -66,6 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement().disable();
 
+        http.requestCache().disable();
+
         http.csrf().disable();
 
         http.cors();
