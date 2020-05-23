@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 @RequiredArgsConstructor
-public class TodoPreAuthenticatedProcessingFilter extends AbstractPreAuthenticatedProcessingFilter {
+public class PreAuthenticatedProcessingFilter extends AbstractPreAuthenticatedProcessingFilter {
     private static final String AUTHORIZATION_HEADER_NAME = "Authorization";
     private static final Pattern AUTHORIZATION_HEADER_PATTERN = Pattern.compile("^[Bb]earer (.*)$");
 
