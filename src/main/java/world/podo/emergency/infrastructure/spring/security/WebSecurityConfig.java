@@ -11,6 +11,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -64,9 +65,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(this.jsonAuthenticationEntryPoint())
                 .accessDeniedHandler(this.jsonAccessDeniedHandler());
 
-        http.sessionManagement().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.requestCache().disable();
+
+        http.rememberMe().disable();
 
         http.csrf().disable();
 
@@ -75,7 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AbstractPreAuthenticatedProcessingFilter todoPreAuthenticatedProcessingFilter() {
-        AbstractPreAuthenticatedProcessingFilter filter = new TodoPreAuthenticatedProcessingFilter();
+        AbstractPreAuthenticatedProcessingFilter filter = new PreAuthenticatedProcessingFilter();
         filter.setAuthenticationManager(new ProviderManager(Collections.singletonList(preAuthTokenAuthenticationProvider())));
         return filter;
     }
