@@ -57,7 +57,7 @@ public class SampleResponse {
 
     public static SampleResponse ghana() {
         return new SampleResponse(
-                ThreadLocalRandom.current().nextLong(),
+                ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
                 new NamesResponse(
                         "가나",
                         "Ghana"
