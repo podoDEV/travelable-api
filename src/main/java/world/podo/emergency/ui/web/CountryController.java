@@ -65,6 +65,8 @@ public class CountryController {
      */
     @PostMapping("/{countryId}/pin")
     public ResponseEntity<ApiResponse> pin(
+            @RequestHeader("Authorization") String authorization,
+            @ApiIgnore @ModelAttribute("memberId") Long memberId,
             @PathVariable Long countryId
     ) {
         // TODO: pin
@@ -78,6 +80,8 @@ public class CountryController {
      */
     @PostMapping("/{countryId}/unpin")
     public ResponseEntity<ApiResponse> unpin(
+            @RequestHeader("Authorization") String authorization,
+            @ApiIgnore @ModelAttribute("memberId") Long memberId,
             @PathVariable Long countryId
     ) {
         // TODO: unpin

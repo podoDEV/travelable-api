@@ -31,11 +31,15 @@ public class MemberCountry {
     /**
      * 구독 시작 시각
      */
-    private OffsetDateTime startedAt;
+    private OffsetDateTime beginAt;
     /**
      * 구독 끝 시각
      */
-    private OffsetDateTime endedAt;
+    private OffsetDateTime endAt;
+    /**
+     * 알람 활성화 여부
+     */
+    private Boolean alarmEnabled;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
