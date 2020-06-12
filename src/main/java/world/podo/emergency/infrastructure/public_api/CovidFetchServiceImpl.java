@@ -43,8 +43,12 @@ public class CovidFetchServiceImpl implements CovidFetchService {
 
     @Override
     public List<CovidFetchValue> fetch(LocalDate localDate) {
-        List<CovidFetchValue> pastValues = this.fetchOnly(localDate.minusDays(1L));
         List<CovidFetchValue> currentValues = this.fetchOnly(localDate);
+        if (currentValues.isEmpty()) {
+            localDate = localDate.minusDays(1L);
+            currentValues = this.fetchOnly(localDate);
+        }
+        List<CovidFetchValue> pastValues = this.fetchOnly(localDate.minusDays(1L));
         return this.merge(currentValues, pastValues);
     }
 
@@ -73,13 +77,18 @@ public class CovidFetchServiceImpl implements CovidFetchService {
     }
 
     private List<CovidFetchValue> resolve(Map resultMap) {
-        Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
-        Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
-        Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
-        List<Map<String, Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
-        return itemList.stream()
-                .map(this::toCovidFetchValue)
-                .collect(Collectors.toList());
+        try {
+            Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
+            Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
+            Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
+            List<Map<String, Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
+            return itemList.stream()
+                    .map(this::toCovidFetchValue)
+                    .collect(Collectors.toList());
+        } catch (ClassCastException ex) {
+            log.error("Failed to resolve CovidFetchValue. resultMap:{}", resultMap, ex);
+            return Collections.emptyList();
+        }
     }
 
     private CovidFetchValue toCovidFetchValue(Map<String, Object> covidFetchMap) {
