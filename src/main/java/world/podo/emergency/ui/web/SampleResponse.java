@@ -5,8 +5,10 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
+import world.podo.emergency.domain.country.CovidFetchService;
+import world.podo.emergency.domain.country.CovidFetchValue;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
@@ -56,7 +58,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class SampleResponse {
     private Long id;
     @JsonProperty("names")
@@ -120,6 +122,53 @@ public class SampleResponse {
                 ThreadLocalRandom.current().nextInt(5),
                 ThreadLocalRandom.current().nextBoolean(),
                 new CovidResponse(),
+                ThreadLocalRandom.current().nextBoolean(),
+                ThreadLocalRandom.current().nextBoolean(),
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+    }
+
+    public static SampleResponse gabon(CovidFetchService covidFetchService) {
+        CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
+                .filter(it -> "가봉".equals(it.getCountryName()))
+                .findFirst()
+                .orElse(null);
+
+        return new SampleResponse(
+                ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
+                new NamesResponse(
+                        "가봉",
+                        "Gabon"
+                ),
+                "241",
+                Arrays.asList(
+                        new TelResponse(
+                                new NamesResponse(
+                                        "경찰",
+                                        "Police"
+                                ),
+                                "177"
+                        )
+                ),
+                new EmbassyResponse(
+                        "B.P. 2620 Libreville, GABON",
+                        null,
+                        "6530-1900",
+                        "7750-7822",
+                        null
+                ),
+                "http://0404.go.kr/dev/country_view.mofa?idx=2&hash=&chkvalue=no2&stext=&group_idx=&alert_level=0",
+                Collections.emptyList(),
+                ThreadLocalRandom.current().nextInt(5),
+                ThreadLocalRandom.current().nextBoolean(),
+                new CovidResponse(
+                        covidFetchValue.getCreatedAt(),
+                        covidFetchValue.getCountryName(),
+                        covidFetchValue.getTotalDeathToll(),
+                        covidFetchValue.getTotalConfirmCases(),
+                        covidFetchValue.getDeltaConfirmCases()
+                ),
                 ThreadLocalRandom.current().nextBoolean(),
                 ThreadLocalRandom.current().nextBoolean(),
                 LocalDateTime.now(),
