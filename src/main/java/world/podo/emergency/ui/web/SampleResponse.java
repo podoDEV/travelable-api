@@ -176,6 +176,61 @@ public class SampleResponse {
         );
     }
 
+    public static SampleResponse guyana(CovidFetchService covidFetchService) {
+        CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
+                .filter(it -> "가이아나공화국".equals(it.getCountryName()))
+                .findFirst()
+                .orElse(null);
+
+        return new SampleResponse(
+                ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
+                new NamesResponse(
+                        "가이아나공화국",
+                        "Guyana"
+                ),
+                "58",
+                Arrays.asList(
+                        new TelResponse(
+                                new NamesResponse(
+                                        "경찰",
+                                        "Police"
+                                ),
+                                "911"
+                        ),
+                        new TelResponse(
+                                new NamesResponse(
+                                        "소방서",
+                                        "Fire station"
+                                ),
+                                "912"
+                        ),
+                        new TelResponse(
+                                new NamesResponse(
+                                        "앰뷸런스",
+                                        "Ambulance"
+                                ),
+                                "913"
+                        )
+                ),
+                new EmbassyResponse(
+                        "Av. Francisco de Miranda, Centro Lido, Torre B, Piso 9, Ofic.91-92-B, El Rosal, Caracas, Venezuela",
+                        "venezuela@mofa.go.kr",
+                        "(58) 212-954-1270",
+                        "(58) 412-309-3247",
+                        "※ 가이아나에는 우리대사관이 없으며, 주베네수엘라한국대사관이 겸임하고 있습니다."
+                ),
+                "http://0404.go.kr/dev/country_view.mofa?idx=315&hash=&chkvalue=no2&stext=&group_idx=&alert_level=0",
+                Collections.emptyList(),
+                ThreadLocalRandom.current().nextInt(5),
+                ThreadLocalRandom.current().nextBoolean(),
+                toCovidResponse(covidFetchValue),
+                ThreadLocalRandom.current().nextBoolean(),
+                ThreadLocalRandom.current().nextBoolean(),
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+    }
+
     private static CovidResponse toCovidResponse(CovidFetchValue covidFetchValue) {
         if (covidFetchValue == null) {
             return null;

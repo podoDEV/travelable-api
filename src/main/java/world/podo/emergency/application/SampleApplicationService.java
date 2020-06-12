@@ -18,7 +18,8 @@ public class SampleApplicationService {
     public List<SampleResponse> getSampleResponses() {
         return Arrays.asList(
                 SampleResponse.ghana(covidFetchService),
-                SampleResponse.gabon(covidFetchService)
+                SampleResponse.gabon(covidFetchService),
+                SampleResponse.guyana(covidFetchService)
         );
     }
 }
