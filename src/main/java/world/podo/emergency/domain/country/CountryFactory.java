@@ -12,18 +12,13 @@ class CountryFactory {
 
     Country create(CountryFetchValue countryFetchValue) {
         return countryRepository.save(
-                new Country(
-                        null,
-                        countryFetchValue.getName(),
-                        countryFetchValue.getEnglishName(),
-                        countryFetchValue.getContinent(),
-                        countryFetchValue.getBasic(),
-                        countryFetchValue.getImageUrl(),
-                        countryFetchValue.getId(),
-                        null,
-                        null,
-                        null,
-                        new ArrayList<>()
-                ));
+                Country.builder()
+                        .name(countryFetchValue.getName())
+                        .englishName(countryFetchValue.getEnglishName())
+                        .description(countryFetchValue.getBasic())
+                        .imageUrl(countryFetchValue.getImageUrl())
+                        .providerCountryId(countryFetchValue.getId())
+                        .build()
+        );
     }
 }

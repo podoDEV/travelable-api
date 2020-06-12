@@ -16,6 +16,7 @@ import java.util.List;
  * 나라
  */
 @Entity
+@Builder
 @Getter
 @ToString(exclude = {
         "memberCountries"
@@ -25,7 +26,7 @@ import java.util.List;
         "memberCountries"
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EntityListeners(AuditingEntityListener.class)
 public class Country {
     @Id
