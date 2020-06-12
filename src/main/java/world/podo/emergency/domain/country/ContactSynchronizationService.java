@@ -15,17 +15,13 @@ public class ContactSynchronizationService {
                                  if (country.getContact() == null) {
                                      Contact contact = contactFactory.create(
                                              country,
-                                             contactFetchValue.getValue(),
-                                             contactFetchValue.getFirstImageUrl(),
-                                             contactFetchValue.getSecondImageUrl()
+                                             contactFetchValue.getValue()
                                      );
                                      country.setContact(contact);
                                      return country;
                                  } else {
                                      return country.updateContact(
-                                             contactFetchValue.getValue(),
-                                             contactFetchValue.getFirstImageUrl(),
-                                             contactFetchValue.getSecondImageUrl()
+                                             contactFetchValue.getValue()
                                      );
                                  }
                              })

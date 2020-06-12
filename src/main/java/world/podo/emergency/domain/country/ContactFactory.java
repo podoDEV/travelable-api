@@ -11,22 +11,15 @@ class ContactFactory {
 
     Contact create(
             Country country,
-            String value,
-            String firstImageUrl,
-            String secondImageUrl
+            String value
     ) {
         Assert.notNull(country, "'country' must not be null");
 
         return contactRepository.save(
-                new Contact(
-                        null,
-                        country,
-                        value,
-                        firstImageUrl,
-                        secondImageUrl,
-                        null,
-                        null
-                )
+                Contact.builder()
+                        .country(country)
+                        .value(value)
+                        .build()
         );
     }
 }

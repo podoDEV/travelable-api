@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  * 연락처
  */
 @Entity
+@Builder
 @Getter
 @ToString
 @EqualsAndHashCode(exclude = "country")
@@ -30,31 +31,33 @@ public class Contact {
     @Lob
     private String value;
     /**
-     * 첫번째 이미지 주소
+     * 전화 번호
      */
-    private String firstImageUrl;
+    private String policeNumber;
+    private String fireStationNumber;
+    private String ambulanceNumber;
     /**
-     * 두번째 이미지 주소
+     * 국가 번호
      */
-    private String secondImageUrl;
+    private String countryNumber;
+    /**
+     * 대사관 정보
+     */
+    private String embassyAddress;
+    private String embassyEmail;
+    private String embassyRepresentationNumber;
+    private String embassyEmergencyNumber;
+    private String embassyDescription;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
     Contact update(
-            String value,
-            String firstImageUrl,
-            String secondImageUrl
+            String value
     ) {
         if (value != null) {
             this.value = value;
-        }
-        if (firstImageUrl != null) {
-            this.firstImageUrl = firstImageUrl;
-        }
-        if (secondImageUrl != null) {
-            this.secondImageUrl = secondImageUrl;
         }
         return this;
     }
