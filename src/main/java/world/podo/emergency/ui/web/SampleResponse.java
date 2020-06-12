@@ -5,7 +5,9 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -38,6 +40,18 @@ import java.util.concurrent.ThreadLocalRandom;
  * "link": ""
  * "notices": [
  * ]
+ * "precautionLevel": 1 ~ 4, // 여행 경보 단계 - 여행주의, 여행자제, 철수권고, 여행금지, 없으면 0
+ * "travelAdvisory": true | false // 특별여행주의보
+ * "covid": {
+ * "totalDeathToll": 123, // 전체 사망자 수
+ * "totalConfirmCases": 1000, // 전체 확진자 수
+ * "deltaConfirmCases": -20, // 어제 오늘 확진자 수 차이
+ * "updatedAt": "2020-06-12T12:34:56" // 한국시간, 실제 API 호출해서 받은 값으로 내려줌
+ * },
+ * "pinned": true | false,
+ * "alarmEnabled": true | false,
+ * "beginAt": "2020-06-12T10:00:00", // 한국시간. timezone 표시 안함
+ * "endAt": "2020-06-13T15:00:00"
  * }
  */
 @Data
@@ -54,6 +68,14 @@ public class SampleResponse {
     private EmbassyResponse embassyResponse;
     private String link;
     private List<String> notices;
+    private Integer precautionLevel;
+    private Boolean travelAdvisory;
+    @JsonProperty("covid")
+    private CovidResponse covidResponse;
+    private Boolean pinned;
+    private Boolean alarmEnabled;
+    private LocalDateTime beginAt;
+    private LocalDateTime endAt;
 
     public static SampleResponse ghana() {
         return new SampleResponse(
@@ -94,7 +116,14 @@ public class SampleResponse {
                         ""
                 ),
                 "http://0404.go.kr/dev/country_view.mofa?idx=390&hash=&chkvalue=no2&stext=&group_idx=&alert_level=0",
-                Collections.emptyList()
+                Collections.emptyList(),
+                ThreadLocalRandom.current().nextInt(5),
+                ThreadLocalRandom.current().nextBoolean(),
+                new CovidResponse(),
+                ThreadLocalRandom.current().nextBoolean(),
+                ThreadLocalRandom.current().nextBoolean(),
+                LocalDateTime.now(),
+                LocalDateTime.now()
         );
     }
 
