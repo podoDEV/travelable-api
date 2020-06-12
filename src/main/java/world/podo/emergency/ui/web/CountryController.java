@@ -81,7 +81,7 @@ public class CountryController {
      * 이미 구독취소된 나라를 요청해도 성공으로 응답합니다
      */
     @PostMapping("/{countryId}/unpin")
-    public ResponseEntity<ApiResponse> unpin(
+    public ResponseEntity<Object> unpin(
             @RequestHeader("Authorization") String authorization,
             @ApiIgnore @ModelAttribute("memberId") Long memberId,
             @PathVariable Long countryId
