@@ -9,11 +9,13 @@ import world.podo.emergency.domain.country.Country;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.Optional;
 
 /**
  * 구독
  */
 @Entity
+@Builder
 @Getter
 @ToString(exclude = {
         "country",
@@ -24,6 +26,7 @@ import java.time.OffsetDateTime;
         "member"
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EntityListeners(AuditingEntityListener.class)
 public class MemberCountry {
     @EmbeddedId
@@ -31,11 +34,11 @@ public class MemberCountry {
     /**
      * 구독 시작 시각
      */
-    private OffsetDateTime beginAt;
+    private LocalDateTime beginAt;
     /**
      * 구독 끝 시각
      */
-    private OffsetDateTime endAt;
+    private LocalDateTime endAt;
     /**
      * 알람 활성화 여부
      */
@@ -52,4 +55,21 @@ public class MemberCountry {
     @MapsId("memberId")
     @ManyToOne
     private Member member;
+
+    public MemberCountry update(
+            LocalDateTime beginAt,
+            LocalDateTime endAt,
+            Boolean alarmEnabled
+    ) {
+        if (beginAt != null) {
+            this.beginAt = beginAt;
+        }
+        if (endAt != null) {
+            this.endAt = endAt;
+        }
+        if (alarmEnabled != null) {
+            this.alarmEnabled = alarmEnabled;
+        }
+        return this;
+    }
 }

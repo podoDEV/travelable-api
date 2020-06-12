@@ -31,7 +31,7 @@ public class CountryController {
             return ResponseEntity.ok(
                     ApiResponse.data(
                             countryApplicationService.getCountries(memberId, pinned, pageable)
-                                                     .getContent()
+                                    .getContent()
                     )
             );
         } catch (MemberNotFoundException ex) {
@@ -67,11 +67,13 @@ public class CountryController {
     public ResponseEntity<ApiResponse> pin(
             @RequestHeader("Authorization") String authorization,
             @ApiIgnore @ModelAttribute("memberId") Long memberId,
-            @PathVariable Long countryId
+            @PathVariable Long countryId,
+            @RequestBody CountryPinRequest countryPinRequest
     ) {
-        // TODO: pin
-        return ResponseEntity.noContent()
-                             .build();
+        CountryDetailResponse countryDetailResponse = countryApplicationService.pinCountry(memberId, countryId, countryPinRequest);
+        return ResponseEntity.ok(
+                ApiResponse.data(countryDetailResponse)
+        );
     }
 
     /**
@@ -84,8 +86,7 @@ public class CountryController {
             @ApiIgnore @ModelAttribute("memberId") Long memberId,
             @PathVariable Long countryId
     ) {
-        // TODO: unpin
-        return ResponseEntity.noContent()
-                             .build();
+        countryApplicationService.unpinCountry(memberId, countryId);
+        return ResponseEntity.noContent().build();
     }
 }
