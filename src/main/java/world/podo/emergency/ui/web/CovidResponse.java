@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CovidResponse {
     private LocalDateTime createdAt;
-    private String countryName;
     private Integer totalDeathToll;
     private Integer totalConfirmCases;
     private Integer deltaConfirmCases;

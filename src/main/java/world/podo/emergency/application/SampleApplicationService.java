@@ -17,7 +17,7 @@ public class SampleApplicationService {
 
     public List<SampleResponse> getSampleResponses() {
         return Arrays.asList(
-                SampleResponse.ghana(),
+                SampleResponse.ghana(covidFetchService),
                 SampleResponse.gabon(covidFetchService)
         );
     }

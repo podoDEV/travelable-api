@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -79,7 +80,12 @@ public class SampleResponse {
     private LocalDateTime beginAt;
     private LocalDateTime endAt;
 
-    public static SampleResponse ghana() {
+    public static SampleResponse ghana(CovidFetchService covidFetchService) {
+        CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
+                .filter(it -> "가나".equals(it.getCountryName()))
+                .findFirst()
+                .orElse(null);
+
         return new SampleResponse(
                 ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
                 new NamesResponse(
@@ -121,7 +127,7 @@ public class SampleResponse {
                 Collections.emptyList(),
                 ThreadLocalRandom.current().nextInt(5),
                 ThreadLocalRandom.current().nextBoolean(),
-                new CovidResponse(),
+                toCovidResponse(covidFetchValue),
                 ThreadLocalRandom.current().nextBoolean(),
                 ThreadLocalRandom.current().nextBoolean(),
                 LocalDateTime.now(),
@@ -162,17 +168,23 @@ public class SampleResponse {
                 Collections.emptyList(),
                 ThreadLocalRandom.current().nextInt(5),
                 ThreadLocalRandom.current().nextBoolean(),
-                new CovidResponse(
-                        covidFetchValue.getCreatedAt(),
-                        covidFetchValue.getCountryName(),
-                        covidFetchValue.getTotalDeathToll(),
-                        covidFetchValue.getTotalConfirmCases(),
-                        covidFetchValue.getDeltaConfirmCases()
-                ),
+                toCovidResponse(covidFetchValue),
                 ThreadLocalRandom.current().nextBoolean(),
                 ThreadLocalRandom.current().nextBoolean(),
                 LocalDateTime.now(),
                 LocalDateTime.now()
+        );
+    }
+
+    private static CovidResponse toCovidResponse(CovidFetchValue covidFetchValue) {
+        if (covidFetchValue == null) {
+            return null;
+        }
+        return new CovidResponse(
+                covidFetchValue.getCreatedAt(),
+                covidFetchValue.getTotalDeathToll(),
+                covidFetchValue.getTotalConfirmCases(),
+                covidFetchValue.getDeltaConfirmCases()
         );
     }
 
