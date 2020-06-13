@@ -12,8 +12,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -267,9 +267,9 @@ public class SampleResponse {
             return null;
         }
         return new NoticeResponse(
-                Long.parseLong(
-                        noticeFetchDetailValue.getId()
-                ),
+                Optional.ofNullable(noticeFetchDetailValue.getId())
+                        .map(String::trim)
+                        .orElse(null),
                 noticeFetchDetailValue.getTitle(),
                 noticeFetchDetailValue.getTextContent(),
                 noticeFetchDetailValue.getHtmlContent(),

@@ -14,7 +14,7 @@ class NoticeAssembler {
             return null;
         }
         return new NoticeResponse(
-                notice.getNoticeId(),
+                notice.getProviderNoticeId(),
                 notice.getTitle(),
                 notice.getTextContent(),
                 notice.getHtmlContent(),
