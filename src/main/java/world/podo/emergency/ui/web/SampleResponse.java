@@ -275,7 +275,7 @@ public class SampleResponse {
                 noticeFetchDetailValue.getHtmlContent(),
                 LocalDateTime.parse(
                         noticeFetchDetailValue.getWrittenDate(),
-                        DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss.SZ")
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SZ")
                 )
         );
     }
