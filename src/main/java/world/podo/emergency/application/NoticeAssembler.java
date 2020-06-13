@@ -13,12 +13,12 @@ class NoticeAssembler {
         if (notice == null) {
             return null;
         }
-        NoticeResponse noticeResponse = new NoticeResponse();
-        noticeResponse.setId(notice.getNoticeId());
-        noticeResponse.setTitle(notice.getTitle());
-        noticeResponse.setTextContent(notice.getTextContent());
-        noticeResponse.setHtmlContent(notice.getHtmlContent());
-        noticeResponse.setCreatedAt(notice.getCreatedAt());
-        return noticeResponse;
+        return new NoticeResponse(
+                notice.getNoticeId(),
+                notice.getTitle(),
+                notice.getTextContent(),
+                notice.getHtmlContent(),
+                notice.getCreatedAt()
+        );
     }
 }
