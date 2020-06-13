@@ -18,6 +18,7 @@ class NoticeAssembler {
         noticeResponse.setTitle(notice.getTitle());
         noticeResponse.setTextContent(notice.getTextContent());
         noticeResponse.setHtmlContent(notice.getHtmlContent());
+        noticeResponse.setCreatedAt(notice.getCreatedAt());
         return noticeResponse;
     }
 }
