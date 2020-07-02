@@ -63,6 +63,10 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
         try {
             Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
             Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
+            Integer totalCount = (int) bodyMap.get("totalCount");
+            if (totalCount == 0) {
+                return Collections.emptyList();
+            }
             Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
             List<Map<String, Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
             return itemList.stream()
