@@ -41,7 +41,7 @@ public class PublicApiContactFetchService implements ContactFetchService {
                                              .build(true)
                                              .toUri();
         ResponseEntity<Map> responseEntity = publicApiRestTemplate.exchange(
-                new RequestEntity(HttpMethod.GET, requestUrl), Map.class
+                new RequestEntity<>(HttpMethod.GET, requestUrl), Map.class
         );
         if (!responseEntity.getStatusCode()
                            .is2xxSuccessful() || responseEntity.getBody() == null) {
@@ -68,8 +68,6 @@ public class PublicApiContactFetchService implements ContactFetchService {
         return new ContactFetchValueImpl(
                 PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.ID),
                 PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.VALUE),
-                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.FIRST_IMAGE_URL),
-                PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.SECOND_IMAGE_URL),
                 PublicApiUtils.get(contactFetchMap, ContactFetchValueImpl.FieldName.WRITTEN_DATE)
         );
     }

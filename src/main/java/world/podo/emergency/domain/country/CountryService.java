@@ -3,6 +3,7 @@ package world.podo.emergency.domain.country;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scripting.config.LangNamespaceHandler;
 import org.springframework.util.Assert;
 import world.podo.emergency.domain.DomainService;
 import world.podo.emergency.domain.member.MemberCountry;
@@ -41,5 +42,10 @@ public class CountryService {
     Optional<Country> getCountryByProviderCountryId(String providerCountryId) {
         Assert.notNull(providerCountryId, "'providerCountryId' must not be null");
         return countryRepository.findByProviderCountryId(providerCountryId);
+    }
+
+    public Optional<Country> getCountryByName(String countryName) {
+        Assert.hasText(countryName, "'countryName' must not be null");
+        return countryRepository.findByName(countryName);
     }
 }

@@ -18,15 +18,11 @@ import world.podo.emergency.domain.country.ContactFetchValue;
 class ContactFetchValueImpl implements ContactFetchValue {
     private final String id;
     private final String value;
-    private final String firstImageUrl;
-    private final String secondImageUrl;
     private final String writtenDate;
 
     public enum FieldName implements FieldNameSupport {
         ID("id"),
         VALUE("contact"),
-        FIRST_IMAGE_URL("imgUrl"),
-        SECOND_IMAGE_URL("imgUrl2"),
         WRITTEN_DATE("wrtDt");
 
         private final String value;

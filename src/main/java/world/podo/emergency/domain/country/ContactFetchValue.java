@@ -5,9 +5,5 @@ public interface ContactFetchValue {
 
     String getValue();
 
-    String getFirstImageUrl();
-
-    String getSecondImageUrl();
-
     String getWrittenDate();
 }

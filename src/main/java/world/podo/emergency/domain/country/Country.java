@@ -16,6 +16,7 @@ import java.util.List;
  * 나라
  */
 @Entity
+@Builder
 @Getter
 @ToString(exclude = {
         "memberCountries"
@@ -25,7 +26,7 @@ import java.util.List;
         "memberCountries"
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EntityListeners(AuditingEntityListener.class)
 public class Country {
     @Id
@@ -39,10 +40,6 @@ public class Country {
      * 나라 이름 (영어)
      */
     private String englishName;
-    /**
-     * 대륙 정보
-     */
-    private String continent;
     /**
      * 기본 정보
      */
@@ -84,9 +81,6 @@ public class Country {
         if (englishName != null) {
             this.englishName = englishName;
         }
-        if (continent != null) {
-            this.continent = continent;
-        }
         if (description != null) {
             this.description = description;
         }
@@ -104,12 +98,10 @@ public class Country {
     }
 
     Country updateContact(
-            String value,
-            String firstImageUrl,
-            String secondImageUrl
+            String value
     ) {
         if (contact != null) {
-            contact.update(value, firstImageUrl, secondImageUrl);
+            contact.update(value);
         }
         return this;
     }

@@ -49,7 +49,7 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
                                              .build(true)
                                              .toUri();
         ResponseEntity<Map> responseEntity = publicApiRestTemplate.exchange(
-                new RequestEntity(HttpMethod.GET, requestUrl), Map.class
+                new RequestEntity<>(HttpMethod.GET, requestUrl), Map.class
         );
         if (!responseEntity.getStatusCode()
                            .is2xxSuccessful() || responseEntity.getBody() == null) {
@@ -95,7 +95,7 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
                                              .build(true)
                                              .toUri();
         ResponseEntity<Map> responseEntity = publicApiRestTemplate.exchange(
-                new RequestEntity(HttpMethod.GET, requestUrl), Map.class
+                new RequestEntity<>(HttpMethod.GET, requestUrl), Map.class
         );
         if (!responseEntity.getStatusCode()
                            .is2xxSuccessful() || responseEntity.getBody() == null) {

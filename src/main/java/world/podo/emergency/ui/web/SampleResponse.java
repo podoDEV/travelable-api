@@ -5,13 +5,17 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
+import world.podo.emergency.domain.country.*;
+import world.podo.emergency.infrastructure.public_api.PublicApiCountryIsoCodeUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 /**
  * {
@@ -56,7 +60,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class SampleResponse {
     private Long id;
     @JsonProperty("names")
@@ -67,7 +71,7 @@ public class SampleResponse {
     @JsonProperty("embassy")
     private EmbassyResponse embassyResponse;
     private String link;
-    private List<String> notices;
+    private List<NoticeResponse> notices;
     private Integer precautionLevel;
     private Boolean travelAdvisory;
     @JsonProperty("covid")
@@ -77,7 +81,12 @@ public class SampleResponse {
     private LocalDateTime beginAt;
     private LocalDateTime endAt;
 
-    public static SampleResponse ghana() {
+    public static SampleResponse ghana(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
+        CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
+                .filter(it -> "가나".equals(it.getCountryName()))
+                .findFirst()
+                .orElse(null);
+
         return new SampleResponse(
                 ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
                 new NamesResponse(
@@ -116,14 +125,158 @@ public class SampleResponse {
                         ""
                 ),
                 "http://0404.go.kr/dev/country_view.mofa?idx=390&hash=&chkvalue=no2&stext=&group_idx=&alert_level=0",
-                Collections.emptyList(),
+                noticeFetchService.fetchByCountryCode(
+                        PublicApiCountryIsoCodeUtils.getIsoCode("가나")
+                ).stream()
+                        .map(NoticeFetchSimpleValue::getId)
+                        .map(noticeFetchService::fetchOne)
+                        .map(SampleResponse::toNoticeResponse)
+                        .collect(Collectors.toList()),
                 ThreadLocalRandom.current().nextInt(5),
                 ThreadLocalRandom.current().nextBoolean(),
-                new CovidResponse(),
+                toCovidResponse(covidFetchValue),
                 ThreadLocalRandom.current().nextBoolean(),
                 ThreadLocalRandom.current().nextBoolean(),
                 LocalDateTime.now(),
                 LocalDateTime.now()
+        );
+    }
+
+    public static SampleResponse gabon(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
+        CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
+                .filter(it -> "가봉".equals(it.getCountryName()))
+                .findFirst()
+                .orElse(null);
+
+        return new SampleResponse(
+                ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
+                new NamesResponse(
+                        "가봉",
+                        "Gabon"
+                ),
+                "241",
+                Arrays.asList(
+                        new TelResponse(
+                                new NamesResponse(
+                                        "경찰",
+                                        "Police"
+                                ),
+                                "177"
+                        )
+                ),
+                new EmbassyResponse(
+                        "B.P. 2620 Libreville, GABON",
+                        null,
+                        "6530-1900",
+                        "7750-7822",
+                        null
+                ),
+                "http://0404.go.kr/dev/country_view.mofa?idx=2&hash=&chkvalue=no2&stext=&group_idx=&alert_level=0",
+                noticeFetchService.fetchByCountryCode(
+                        PublicApiCountryIsoCodeUtils.getIsoCode("가봉")
+                ).stream()
+                        .map(NoticeFetchSimpleValue::getId)
+                        .map(noticeFetchService::fetchOne)
+                        .map(SampleResponse::toNoticeResponse)
+                        .collect(Collectors.toList()),
+                ThreadLocalRandom.current().nextInt(5),
+                ThreadLocalRandom.current().nextBoolean(),
+                toCovidResponse(covidFetchValue),
+                ThreadLocalRandom.current().nextBoolean(),
+                ThreadLocalRandom.current().nextBoolean(),
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+    }
+
+    public static SampleResponse guyana(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
+        CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
+                .filter(it -> "가이아나공화국".equals(it.getCountryName()))
+                .findFirst()
+                .orElse(null);
+
+        return new SampleResponse(
+                ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
+                new NamesResponse(
+                        "가이아나공화국",
+                        "Guyana"
+                ),
+                "58",
+                Arrays.asList(
+                        new TelResponse(
+                                new NamesResponse(
+                                        "경찰",
+                                        "Police"
+                                ),
+                                "911"
+                        ),
+                        new TelResponse(
+                                new NamesResponse(
+                                        "소방서",
+                                        "Fire station"
+                                ),
+                                "912"
+                        ),
+                        new TelResponse(
+                                new NamesResponse(
+                                        "앰뷸런스",
+                                        "Ambulance"
+                                ),
+                                "913"
+                        )
+                ),
+                new EmbassyResponse(
+                        "Av. Francisco de Miranda, Centro Lido, Torre B, Piso 9, Ofic.91-92-B, El Rosal, Caracas, Venezuela",
+                        "venezuela@mofa.go.kr",
+                        "(58) 212-954-1270",
+                        "(58) 412-309-3247",
+                        "※ 가이아나에는 우리대사관이 없으며, 주베네수엘라한국대사관이 겸임하고 있습니다."
+                ),
+                "http://0404.go.kr/dev/country_view.mofa?idx=315&hash=&chkvalue=no2&stext=&group_idx=&alert_level=0",
+                noticeFetchService.fetchByCountryCode(
+                        PublicApiCountryIsoCodeUtils.getIsoCode("가이아나공화국")
+                ).stream()
+                        .map(NoticeFetchSimpleValue::getId)
+                        .map(noticeFetchService::fetchOne)
+                        .map(SampleResponse::toNoticeResponse)
+                        .collect(Collectors.toList()),
+                ThreadLocalRandom.current().nextInt(5),
+                ThreadLocalRandom.current().nextBoolean(),
+                toCovidResponse(covidFetchValue),
+                ThreadLocalRandom.current().nextBoolean(),
+                ThreadLocalRandom.current().nextBoolean(),
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+    }
+
+    private static CovidResponse toCovidResponse(CovidFetchValue covidFetchValue) {
+        if (covidFetchValue == null) {
+            return null;
+        }
+        return new CovidResponse(
+                covidFetchValue.getCreatedAt(),
+                covidFetchValue.getTotalDeathToll(),
+                covidFetchValue.getTotalConfirmCases(),
+                covidFetchValue.getDeltaConfirmCases()
+        );
+    }
+
+    private static NoticeResponse toNoticeResponse(NoticeFetchDetailValue noticeFetchDetailValue) {
+        if (noticeFetchDetailValue == null) {
+            return null;
+        }
+        return new NoticeResponse(
+                Optional.ofNullable(noticeFetchDetailValue.getId())
+                        .map(String::trim)
+                        .orElse(null),
+                noticeFetchDetailValue.getTitle(),
+                noticeFetchDetailValue.getTextContent(),
+                noticeFetchDetailValue.getHtmlContent(),
+                LocalDateTime.parse(
+                        noticeFetchDetailValue.getWrittenDate(),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SZ")
+                )
         );
     }
 
