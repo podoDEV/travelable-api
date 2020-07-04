@@ -47,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/api/**")
                 .authorizeRequests()
+                .mvcMatchers(HttpMethod.POST, "/api/inner/**").permitAll()
                 .mvcMatchers(HttpMethod.POST, "/api/members/login").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/api/covids").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/api/sample").permitAll()

@@ -21,7 +21,7 @@ public class CountryController {
      * 국가 목록을 조회합니다
      */
     @GetMapping
-    public ResponseEntity<ApiResponse<List<CountrySimpleResponse>>> getCountries(
+    public ResponseEntity<ApiResponse<List<CountryResponse>>> getCountries(
             @RequestHeader("Authorization") String authorization,
             @ApiIgnore @ModelAttribute("memberId") Long memberId,
             @RequestParam(required = false) Boolean pinned,
@@ -30,8 +30,7 @@ public class CountryController {
         try {
             return ResponseEntity.ok(
                     ApiResponse.data(
-                            countryApplicationService.getCountries(memberId, pinned, pageable)
-                                    .getContent()
+                            countryApplicationService.getCountries(memberId, pinned, pageable).getContent()
                     )
             );
         } catch (MemberNotFoundException ex) {
@@ -51,7 +50,7 @@ public class CountryController {
         try {
             return ResponseEntity.ok(
                     ApiResponse.data(
-                            countryApplicationService.getCountry(memberId, countryId)
+                            null
                     )
             );
         } catch (MemberNotFoundException | CountryNotFoundException ex) {

@@ -6,17 +6,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import world.podo.emergency.domain.country.Country;
-import world.podo.emergency.domain.country.CountryNotFoundException;
-import world.podo.emergency.domain.country.CountryService;
+import world.podo.emergency.domain.country.*;
 import world.podo.emergency.domain.member.Member;
 import world.podo.emergency.domain.member.MemberCountry;
 import world.podo.emergency.domain.member.MemberCountryRepository;
 import world.podo.emergency.domain.member.MemberService;
 import world.podo.emergency.ui.web.CountryDetailResponse;
 import world.podo.emergency.ui.web.CountryPinRequest;
-import world.podo.emergency.ui.web.CountrySimpleResponse;
+import world.podo.emergency.ui.web.CountryResponse;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -28,14 +27,23 @@ public class CountryApplicationService {
     private final MemberService memberService;
     private final MemberCountryRepository memberCountryRepository;
     private final CountryAssembler countryAssembler;
+    private final NoticeRepository noticeRepository;
+    private final CovidFetchService covidFetchService;
 
-    public Page<CountrySimpleResponse> getCountries(Long memberId, Boolean pinned, Pageable pageable) {
+    public Page<CountryResponse> getCountries(Long memberId, Boolean pinned, Pageable pageable) {
         Assert.notNull(memberId, "'memberId' must not be null");
         Assert.notNull(pageable, "'pageable' must not be null");
 
         Member member = memberService.getMember(memberId);
         return countryService.getCountries(memberId, pinned, pageable)
-                .map(country -> countryAssembler.toCountrySimpleResponse(member, country));
+                .map(country -> countryAssembler.toCountryResponse(
+                        member,
+                        country,
+                        noticeRepository.findByCountryOrderByProviderNoticeId(country),
+                        covidFetchService.fetch(LocalDate.now()).stream()
+                                .filter(it -> country.getName().equals(it.getCountryName()))
+                                .findFirst()
+                                .orElse(null)));
     }
 
     public CountryDetailResponse getCountry(Long memberId, Long countryId) {

@@ -25,10 +25,10 @@ class PublicApiUtils {
 
     static String getOrDefault(Map<String, Object> map, String key, Object defaultValue) {
         return Optional.ofNullable(map.getOrDefault(key, defaultValue))
-                       .filter(Objects::nonNull)
-                       .map(String::valueOf)
-                       .map(String::trim)
-                       .orElse(null);
+                .filter(Objects::nonNull)
+                .map(String::valueOf)
+                .map(String::trim)
+                .orElse(null);
     }
 
     static String get(Map<String, Object> map, FieldNameSupport fieldNameSupporter) {
