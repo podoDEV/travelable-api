@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -67,10 +68,18 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
                 return Collections.emptyList();
             }
             Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
-            Map<String, Object> itemMap = (Map<String, Object>) itemsMap.get("item");
-            return Collections.singletonList(
-                    this.toNoticeFetchSimpleValue(itemMap)
-            );
+            Object item = itemsMap.get("item");
+            if (item instanceof List) {
+                return ((List<Map<String, Object>>) item).stream()
+                        .map(this::toNoticeFetchSimpleValue)
+                        .collect(Collectors.toList());
+            } else if (item instanceof Map) {
+                return Collections.singletonList(
+                        this.toNoticeFetchSimpleValue((Map<String, Object>) item)
+                );
+            } else {
+                return Collections.emptyList();
+            }
         } catch (ClassCastException ex) {
             log.error("Failed to parse result. result:{}", resultMap, ex);
             return Collections.emptyList();
