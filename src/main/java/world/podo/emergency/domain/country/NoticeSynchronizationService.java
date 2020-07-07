@@ -14,17 +14,19 @@ public class NoticeSynchronizationService {
             return null;
         }
         return noticeRepository.findByProviderNoticeId(noticeFetchDetailValue.getId())
-                        .map(notice -> notice.update(
-                                noticeFetchDetailValue.getId(),
-                                noticeFetchDetailValue.getTitle(),
-                                noticeFetchDetailValue.getTextContent(),
-                                noticeFetchDetailValue.getHtmlContent()
-                        ))
-                        .orElseGet(() -> noticeFactory.create(
-                                noticeFetchDetailValue.getId(),
-                                noticeFetchDetailValue.getTitle(),
-                                noticeFetchDetailValue.getTextContent(),
-                                noticeFetchDetailValue.getHtmlContent()
-                        ));
+                .map(notice -> notice.update(
+                        noticeFetchDetailValue.getId(),
+                        noticeFetchDetailValue.getTitle(),
+                        noticeFetchDetailValue.getTextContent(),
+                        noticeFetchDetailValue.getHtmlContent(),
+                        noticeFetchDetailValue.getWrittenDate()
+                ))
+                .orElseGet(() -> noticeFactory.create(
+                        noticeFetchDetailValue.getId(),
+                        noticeFetchDetailValue.getTitle(),
+                        noticeFetchDetailValue.getTextContent(),
+                        noticeFetchDetailValue.getHtmlContent(),
+                        noticeFetchDetailValue.getWrittenDate()
+                ));
     }
 }

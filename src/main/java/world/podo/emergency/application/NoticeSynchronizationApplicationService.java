@@ -29,6 +29,8 @@ public class NoticeSynchronizationApplicationService {
                              .map(noticeFetchService::fetchByCountryCode)
                              .flatMap(Collection::stream)
                              .map(NoticeFetchSimpleValue::getId)
+                             .filter(Objects::nonNull)
+                             .map(String::trim)
                              .distinct()
                              .map(noticeFetchService::fetchOne)
                              .map(noticeSynchronizationService::synchronize)

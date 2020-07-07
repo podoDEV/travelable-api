@@ -3,6 +3,9 @@ package world.podo.emergency.domain.country;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Component
 @RequiredArgsConstructor
 class NoticeFactory {
@@ -12,7 +15,8 @@ class NoticeFactory {
             String providerNoticeId,
             String title,
             String textContent,
-            String htmlContent
+            String htmlContent,
+            String writtenAt
     ) {
         return noticeRepository.save(
                 new Notice(
@@ -22,6 +26,7 @@ class NoticeFactory {
                         title,
                         textContent,
                         htmlContent,
+                        LocalDateTime.parse(writtenAt, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")),
                         null,
                         null
                 )
