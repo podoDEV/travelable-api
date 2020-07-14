@@ -67,7 +67,6 @@ public class Country {
             String providerCountryId,
             String name,
             String englishName,
-            String continent,
             String description,
             String imageUrl
     ) {
