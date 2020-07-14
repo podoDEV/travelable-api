@@ -1,9 +1,10 @@
-package world.podo.emergency.domain.country;
+package world.podo.emergency.domain.notice;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import world.podo.emergency.domain.country.Country;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

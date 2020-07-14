@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import world.podo.emergency.domain.country.CovidFetchService;
-import world.podo.emergency.domain.country.NoticeFetchService;
+import world.podo.emergency.domain.notice.NoticeFetchService;
 import world.podo.emergency.ui.web.CountryResponse;
 
 import java.util.Arrays;

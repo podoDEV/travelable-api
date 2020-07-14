@@ -2,7 +2,7 @@ package world.podo.emergency.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import world.podo.emergency.domain.country.Notice;
+import world.podo.emergency.domain.notice.Notice;
 import world.podo.emergency.ui.web.NoticeResponse;
 
 @Component

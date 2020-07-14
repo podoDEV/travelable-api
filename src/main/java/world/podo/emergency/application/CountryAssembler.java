@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 import world.podo.emergency.domain.country.Contact;
 import world.podo.emergency.domain.country.Country;
 import world.podo.emergency.domain.country.CovidFetchValue;
-import world.podo.emergency.domain.country.Notice;
 import world.podo.emergency.domain.member.Member;
 import world.podo.emergency.domain.member.MemberCountry;
 import world.podo.emergency.domain.member.MemberCountryId;
 import world.podo.emergency.domain.member.MemberCountryRepository;
+import world.podo.emergency.domain.notice.Notice;
 import world.podo.emergency.ui.web.CountryDetailResponse;
 import world.podo.emergency.ui.web.CountryResponse;
 import world.podo.emergency.ui.web.CountrySimpleResponse;
@@ -46,8 +46,8 @@ class CountryAssembler {
         countryDetailResponse.setName(country.getName());
         countryDetailResponse.setPinned(memberCountryRepository.existsById(MemberCountryId.of(member, country)));
         countryDetailResponse.setContact(Optional.ofNullable(country.getContact())
-                .map(Contact::getValue)
-                .orElse(null));
+                                                 .map(Contact::getValue)
+                                                 .orElse(null));
         return countryDetailResponse;
     }
 
@@ -56,16 +56,16 @@ class CountryAssembler {
         countryResponse.setId(country.getCountryId());
         countryResponse.setNamesResponse(
                 NamesResponse.builder()
-                        .ko(country.getName())
-                        .en(country.getEnglishName())
-                        .build()
+                             .ko(country.getName())
+                             .en(country.getEnglishName())
+                             .build()
         );
 //        countryResponse.setTelResponses(null);
 //        countryResponse.setLink(null);
         countryResponse.setNotices(
                 notices.stream()
-                        .map(noticeAssembler::toNoticeResponse)
-                        .collect(Collectors.toList())
+                       .map(noticeAssembler::toNoticeResponse)
+                       .collect(Collectors.toList())
         );
 //        countryResponse.setPrecautionLevel();
 //        countryResponse.setTravelAdvisory(false);

@@ -1,6 +1,7 @@
-package world.podo.emergency.domain.country;
+package world.podo.emergency.domain.notice;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import world.podo.emergency.domain.country.Country;
 
 import java.util.List;
 import java.util.Optional;

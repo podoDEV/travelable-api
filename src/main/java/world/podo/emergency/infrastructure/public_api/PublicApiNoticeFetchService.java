@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import world.podo.emergency.domain.country.NoticeFetchDetailValue;
-import world.podo.emergency.domain.country.NoticeFetchService;
-import world.podo.emergency.domain.country.NoticeFetchSimpleValue;
+import world.podo.emergency.domain.notice.NoticeFetchDetailValue;
+import world.podo.emergency.domain.notice.NoticeFetchService;
+import world.podo.emergency.domain.notice.NoticeFetchSimpleValue;
 
 import java.net.URI;
 import java.util.Collections;
@@ -43,16 +43,16 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
     @Override
     public List<NoticeFetchSimpleValue> fetchByCountryCode(String countryCode) {
         URI requestUrl = UriComponentsBuilder.fromHttpUrl(publicApiHost)
-                .path(publicApiNoticeListPath)
-                .queryParams(PublicApiUtils.createQueryParams())
-                .queryParam("isoCode1", countryCode)
-                .build(true)
-                .toUri();
+                                             .path(publicApiNoticeListPath)
+                                             .queryParams(PublicApiUtils.createQueryParams())
+                                             .queryParam("isoCode1", countryCode)
+                                             .build(true)
+                                             .toUri();
         ResponseEntity<Map> responseEntity = publicApiRestTemplate.exchange(
                 new RequestEntity<>(HttpMethod.GET, requestUrl), Map.class
         );
         if (!responseEntity.getStatusCode()
-                .is2xxSuccessful() || responseEntity.getBody() == null) {
+                           .is2xxSuccessful() || responseEntity.getBody() == null) {
             log.error("Failed to get notices. statusCode:" + responseEntity.getStatusCode());
             throw new CountryApiFailedException("Failed to get notices. statusCode:" + responseEntity.getStatusCode());
         }
@@ -71,8 +71,8 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
             Object item = itemsMap.get("item");
             if (item instanceof List) {
                 return ((List<Map<String, Object>>) item).stream()
-                        .map(this::toNoticeFetchSimpleValue)
-                        .collect(Collectors.toList());
+                                                         .map(this::toNoticeFetchSimpleValue)
+                                                         .collect(Collectors.toList());
             } else if (item instanceof Map) {
                 return Collections.singletonList(
                         this.toNoticeFetchSimpleValue((Map<String, Object>) item)
@@ -101,16 +101,16 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
     @Override
     public NoticeFetchDetailValue fetchOne(String id) {
         URI requestUrl = UriComponentsBuilder.fromHttpUrl(publicApiHost)
-                .path(publicApiNoticeOnePath)
-                .queryParam("id", id)
-                .queryParam("_type", "json")
-                .build(true)
-                .toUri();
+                                             .path(publicApiNoticeOnePath)
+                                             .queryParam("id", id)
+                                             .queryParam("_type", "json")
+                                             .build(true)
+                                             .toUri();
         ResponseEntity<Map> responseEntity = publicApiRestTemplate.exchange(
                 new RequestEntity<>(HttpMethod.GET, requestUrl), Map.class
         );
         if (!responseEntity.getStatusCode()
-                .is2xxSuccessful() || responseEntity.getBody() == null) {
+                           .is2xxSuccessful() || responseEntity.getBody() == null) {
             log.error("Failed to get notice. statusCode:" + responseEntity.getStatusCode());
             throw new CountryApiFailedException("Failed to get notice. statusCode:" + responseEntity.getStatusCode());
         }
@@ -124,8 +124,8 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
             Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
             Map<String, Object> item = (Map<String, Object>) itemsMap.get("item");
             return Optional.ofNullable(item)
-                    .map(this::toNoticeFetchDetailValue)
-                    .orElse(null);
+                           .map(this::toNoticeFetchDetailValue)
+                           .orElse(null);
 
         } catch (ClassCastException ex) {
             log.error("Failed to parse result. result:{}", resultMap, ex);

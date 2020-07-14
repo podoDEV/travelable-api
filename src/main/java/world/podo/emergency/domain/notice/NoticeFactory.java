@@ -1,4 +1,4 @@
-package world.podo.emergency.domain.country;
+package world.podo.emergency.domain.notice;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

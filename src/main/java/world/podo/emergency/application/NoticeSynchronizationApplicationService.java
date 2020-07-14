@@ -3,7 +3,12 @@ package world.podo.emergency.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import world.podo.emergency.domain.country.*;
+import world.podo.emergency.domain.country.Country;
+import world.podo.emergency.domain.country.CountryService;
+import world.podo.emergency.domain.notice.Notice;
+import world.podo.emergency.domain.notice.NoticeFetchService;
+import world.podo.emergency.domain.notice.NoticeFetchSimpleValue;
+import world.podo.emergency.domain.notice.NoticeSynchronizationService;
 import world.podo.emergency.infrastructure.public_api.PublicApiCountryIsoCodeUtils;
 
 import java.util.Collection;

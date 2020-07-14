@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import world.podo.emergency.application.NoticeSynchronizationApplicationService;
-import world.podo.emergency.domain.country.Notice;
+import world.podo.emergency.domain.notice.Notice;
 
 import java.util.List;
 
