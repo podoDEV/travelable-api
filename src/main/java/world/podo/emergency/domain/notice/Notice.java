@@ -32,6 +32,7 @@ public class Notice {
     @GeneratedValue
     private Long noticeId;
     @ManyToOne
+    @Setter
     private Country country;
     private String providerNoticeId;
     private String title;
