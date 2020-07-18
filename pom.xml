@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>world.podo</groupId>
-    <artifactId>emergency</artifactId>
+    <artifactId>travelable</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>emergency-api</name>
+    <name>travelable-api</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
