@@ -11,4 +11,25 @@ public class TelResponse {
     @JsonProperty("names")
     private NamesResponse namesResponse;
     private String value;
+
+    public static TelResponse ambulance(String ambulanceNumber) {
+        return new TelResponse(
+                NamesResponse.police(),
+                ambulanceNumber
+        );
+    }
+
+    public static TelResponse fireStation(String fireStationNumber) {
+        return new TelResponse(
+                NamesResponse.fireStation(),
+                fireStationNumber
+        );
+    }
+
+    public static TelResponse police(String policeNumber) {
+        return new TelResponse(
+                NamesResponse.police(),
+                policeNumber
+        );
+    }
 }

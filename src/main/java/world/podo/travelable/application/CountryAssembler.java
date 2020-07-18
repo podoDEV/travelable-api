@@ -12,6 +12,7 @@ import world.podo.travelable.domain.member.MemberCountryRepository;
 import world.podo.travelable.domain.notice.Notice;
 import world.podo.travelable.ui.web.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -78,6 +79,19 @@ class CountryAssembler {
                                    .representativeNumber(contact.getEmbassyRepresentationNumber())
                                    .build()
             );
+            List<TelResponse> telResponses = new ArrayList<>();
+            if (contact.getPoliceNumber() != null) {
+                telResponses.add(TelResponse.police(contact.getPoliceNumber()));
+            }
+            if (contact.getFireStationNumber() != null) {
+                telResponses.add(TelResponse.fireStation(contact.getFireStationNumber()));
+            }
+            if (contact.getAmbulanceNumber() != null) {
+                telResponses.add(TelResponse.ambulance(contact.getAmbulanceNumber()));
+            }
+            if (!telResponses.isEmpty()) {
+                countryResponse.setTelResponses(telResponses);
+            }
         }
         countryResponse.setCovidResponse(
                 covidAssembler.toCovidResponse(covidFetchValue)
