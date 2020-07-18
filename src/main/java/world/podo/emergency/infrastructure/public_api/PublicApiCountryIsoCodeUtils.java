@@ -14,6 +14,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("가나", "GHA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("가봉", "GAB");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("가이아나", "GUY");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("가이아나공화국", "GUY");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("감비아", "GMB");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("건지 섬", "GGY");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("과들루프", "GLP");
@@ -30,6 +31,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("남극", "ATA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("남수단", "SSD");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("남아프리카 공화국", "ZAF");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("남아프리카공화국", "ZAF");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("네덜란드", "NLD");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("네덜란드령 안틸레스", "ANT");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("네팔", "NPL");
@@ -43,7 +45,9 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("대한민국", "KOR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("덴마크", "DNK");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("도미니카 공화국", "DOM");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("도미니카공화국", "DOM");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("도미니카 연방", "DMA");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("도미니카연방", "DMA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("독일", "DEU");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("동티모르", "TLS");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("라오스", "LAO");
@@ -62,8 +66,10 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("마다가스카르", "MDG");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("마르티니크", "MTQ");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("마셜 제도", "MHL");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("마셜제도", "MHL");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("마요트", "MYT");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("마카오", "MAC");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("마카오(중국)", "MAC");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("마케도니아 공화국", "MKD");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("말라위", "MWI");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("말레이시아", "MYS");
@@ -74,6 +80,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("모로코", "MAR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("모리셔스", "MUS");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("모리타니", "MRT");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("모리타니아", "MRT");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("모잠비크", "MOZ");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("몬테네그로", "MNE");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("몬트세랫", "MSR");
@@ -86,6 +93,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("미국령 버진아일랜드", "VIR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("미얀마", "MMR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("미크로네시아 연방", "FSM");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("미크로네시아", "FSM");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("바누아투", "VUT");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("바레인", "BHR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("바베이도스", "BRB");
@@ -100,6 +108,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("벨라루스", "BLR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("벨리즈", "BLZ");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("보스니아 헤르체고비나", "BIH");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("보스니아-헤르체고비나", "BIH");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("보츠와나", "BWA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("볼리비아", "BOL");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("부룬디", "BDI");
@@ -115,6 +124,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("사우스조지아 사우스샌드위치 제도", "SGS");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("산마리노", "SMR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("상투메 프린시페", "STP");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("상투메프린시페", "STP");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("생피에르 미클롱", "SPM");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("서사하라", "ESH");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("세네갈", "SEN");
@@ -122,10 +132,13 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("세이셸", "SYC");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("세인트루시아", "LCA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("세인트빈센트 그레나딘", "VCT");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("세인트빈센트그레나딘", "VCT");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("세인트키츠 네비스", "KNA");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("세인트키츠네비스", "KNA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("세인트헬레나", "SHN");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("소말리아", "SOM");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("솔로몬 제도", "SLB");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("솔로몬제도", "SLB");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("수단", "SDN");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("수리남", "SUR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("스리랑카", "LKA");
@@ -154,6 +167,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("알제리", "DZA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("앙골라", "AGO");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("앤티가 바부다", "ATG");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("앤티가바부다", "ATG");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("앵귈라", "AIA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("에리트레아", "ERI");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("에스토니아", "EST");
@@ -166,6 +180,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("예멘", "YEM");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("오만", "OMN");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("오스트레일리아", "AUS");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("호주", "AUS");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("오스트리아", "AUT");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("온두라스", "HND");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("올란드 제도", "ALA");
@@ -187,11 +202,14 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("잠비아", "ZMB");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("저지 섬", "JEY");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("적도 기니", "GNQ");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("적도기니", "GNQ");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("조선민주주의인민공화국", "PRK");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("조지아", "GEO");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("중앙아프리카 공화국", "CAF");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("중앙아프리카공화국", "CAF");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("중화민국", "TWN");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("중화인민공화국", "CHN");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("중국", "CHN");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("지부티", "DJI");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("지브롤터", "GIB");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("짐바브웨", "ZWE");
@@ -212,16 +230,20 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("코트디부아르", "CIV");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("콜롬비아", "COL");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("콩고 공화국", "COG");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("콩고", "COG");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("콩고 민주 공화국", "COD");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("콩고민주공화국", "COD");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("쿠바", "CUB");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("쿠웨이트", "KWT");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("쿡 제도", "COK");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("쿡제도", "COK");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("크로아티아", "HRV");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("크리스마스 섬", "CXR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("키르기스스탄", "KGZ");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("키리바시", "KIR");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("키프로스", "CYP");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("타이", "THA");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("태국", "THA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("타지키스탄", "TJK");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("탄자니아", "TZA");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("터크스 케이커스 제도", "TCA");
@@ -233,10 +255,12 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("투발루", "TUV");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("튀니지", "TUN");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("트리니다드 토바고", "TTO");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("트리니다드토바고", "TTO");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("파나마", "PAN");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("파라과이", "PRY");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("파키스탄", "PAK");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("파푸아 뉴기니", "PNG");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("파푸아뉴기니", "PNG");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("팔라우", "PLW");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("팔레스타인", "PSE");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("페로 제도", "FRO");
@@ -255,6 +279,7 @@ public class PublicApiCountryIsoCodeUtils {
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("허드 맥도널드 제도", "HMD");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("헝가리", "HUN");
         DEFAULT_COUNTRY_ISO_CODE_MAP.put("홍콩", "HKG");
+        DEFAULT_COUNTRY_ISO_CODE_MAP.put("홍콩(중국)", "HKG");
     }
 
     public String getIsoCode(String name) {

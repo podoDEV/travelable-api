@@ -15,7 +15,7 @@ public class SampleController {
     private final SampleApplicationService sampleApplicationService;
 
     @GetMapping("sample")
-    public ApiResponse<List<SampleResponse>> getSamples() {
+    public ApiResponse<List<CountryResponse>> getSamples() {
         return ApiResponse.data(
                 sampleApplicationService.getSampleResponses()
         );

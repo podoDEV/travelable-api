@@ -1,12 +1,15 @@
-package world.podo.emergency.domain.country;
+package world.podo.emergency.domain.notice;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import world.podo.emergency.domain.country.Country;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
  * 공지사항
@@ -29,6 +32,7 @@ public class Notice {
     @GeneratedValue
     private Long noticeId;
     @ManyToOne
+    @Setter
     private Country country;
     private String providerNoticeId;
     private String title;
@@ -36,6 +40,7 @@ public class Notice {
     private String textContent;
     @Lob
     private String htmlContent;
+    private LocalDateTime writtenAt;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
@@ -45,7 +50,8 @@ public class Notice {
             String providerNoticeId,
             String title,
             String textContent,
-            String htmlContent
+            String htmlContent,
+            String writtenAt
     ) {
         if (!this.providerNoticeId.equals(providerNoticeId)) {
             return this;
@@ -59,6 +65,20 @@ public class Notice {
         if (htmlContent != null) {
             this.htmlContent = htmlContent;
         }
+        if (writtenAt != null) {
+            this.writtenAt = LocalDateTime.parse(
+                    writtenAt,
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+            );
+        }
         return this;
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void postUpdate() {
+        this.textContent = Optional.ofNullable(textContent)
+                                   .map(it -> it.replaceAll("&nbsp;", ""))
+                                   .orElse(null);
     }
 }

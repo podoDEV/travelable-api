@@ -15,7 +15,6 @@ public class CountrySynchronizationService {
                                      countryFetchValue.getId(),
                                      countryFetchValue.getName(),
                                      countryFetchValue.getEnglishName(),
-                                     countryFetchValue.getContinent(),
                                      countryFetchValue.getBasic(),
                                      countryFetchValue.getImageUrl()
                              ))

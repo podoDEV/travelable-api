@@ -11,7 +11,7 @@ import world.podo.emergency.application.CountrySynchronizationApplicationService
 import world.podo.emergency.application.NoticeSynchronizationApplicationService;
 import world.podo.emergency.domain.country.Contact;
 import world.podo.emergency.domain.country.Country;
-import world.podo.emergency.domain.country.Notice;
+import world.podo.emergency.domain.notice.Notice;
 
 import java.util.List;
 

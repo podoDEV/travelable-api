@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import world.podo.emergency.domain.country.NoticeFetchDetailValue;
-import world.podo.emergency.domain.country.NoticeFetchService;
-import world.podo.emergency.domain.country.NoticeFetchSimpleValue;
+import world.podo.emergency.domain.notice.NoticeFetchDetailValue;
+import world.podo.emergency.domain.notice.NoticeFetchService;
+import world.podo.emergency.domain.notice.NoticeFetchSimpleValue;
 
 import java.net.URI;
 import java.util.Collections;
@@ -68,10 +68,18 @@ public class PublicApiNoticeFetchService implements NoticeFetchService {
                 return Collections.emptyList();
             }
             Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
-            List<Map<String, Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
-            return itemList.stream()
-                           .map(this::toNoticeFetchSimpleValue)
-                           .collect(Collectors.toList());
+            Object item = itemsMap.get("item");
+            if (item instanceof List) {
+                return ((List<Map<String, Object>>) item).stream()
+                                                         .map(this::toNoticeFetchSimpleValue)
+                                                         .collect(Collectors.toList());
+            } else if (item instanceof Map) {
+                return Collections.singletonList(
+                        this.toNoticeFetchSimpleValue((Map<String, Object>) item)
+                );
+            } else {
+                return Collections.emptyList();
+            }
         } catch (ClassCastException ex) {
             log.error("Failed to parse result. result:{}", resultMap, ex);
             return Collections.emptyList();

@@ -9,14 +9,17 @@ import org.springframework.util.Assert;
 import world.podo.emergency.domain.country.Country;
 import world.podo.emergency.domain.country.CountryNotFoundException;
 import world.podo.emergency.domain.country.CountryService;
+import world.podo.emergency.domain.country.CovidFetchService;
 import world.podo.emergency.domain.member.Member;
 import world.podo.emergency.domain.member.MemberCountry;
 import world.podo.emergency.domain.member.MemberCountryRepository;
 import world.podo.emergency.domain.member.MemberService;
+import world.podo.emergency.domain.notice.NoticeRepository;
 import world.podo.emergency.ui.web.CountryDetailResponse;
 import world.podo.emergency.ui.web.CountryPinRequest;
-import world.podo.emergency.ui.web.CountrySimpleResponse;
+import world.podo.emergency.ui.web.CountryResponse;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -28,14 +31,23 @@ public class CountryApplicationService {
     private final MemberService memberService;
     private final MemberCountryRepository memberCountryRepository;
     private final CountryAssembler countryAssembler;
+    private final NoticeRepository noticeRepository;
+    private final CovidFetchService covidFetchService;
 
-    public Page<CountrySimpleResponse> getCountries(Long memberId, Boolean pinned, Pageable pageable) {
+    public Page<CountryResponse> getCountries(Long memberId, Boolean pinned, Pageable pageable) {
         Assert.notNull(memberId, "'memberId' must not be null");
         Assert.notNull(pageable, "'pageable' must not be null");
 
         Member member = memberService.getMember(memberId);
         return countryService.getCountries(memberId, pinned, pageable)
-                .map(country -> countryAssembler.toCountrySimpleResponse(member, country));
+                             .map(country -> countryAssembler.toCountryResponse(
+                                     member,
+                                     country,
+                                     noticeRepository.findByCountryOrderByProviderNoticeId(country),
+                                     covidFetchService.fetch(LocalDate.now()).stream()
+                                                      .filter(it -> country.getName().equals(it.getCountryName()))
+                                                      .findFirst()
+                                                      .orElse(null)));
     }
 
     public CountryDetailResponse getCountry(Long memberId, Long countryId) {
@@ -44,7 +56,7 @@ public class CountryApplicationService {
 
         Member member = memberService.getMember(memberId);
         Country country = countryService.getCountry(countryId)
-                .orElseThrow(CountryNotFoundException::new);
+                                        .orElseThrow(CountryNotFoundException::new);
         return countryAssembler.toCountryDetailResponse(member, country);
     }
 
@@ -55,22 +67,22 @@ public class CountryApplicationService {
     ) {
         Member member = memberService.getMember(memberId);
         Country country = countryService.getCountry(countryId)
-                .orElseThrow(CountryNotFoundException::new);
+                                        .orElseThrow(CountryNotFoundException::new);
 
         LocalDateTime beginAt = Optional.ofNullable(countryPinRequest).map(CountryPinRequest::getBeginAt).orElse(null);
         LocalDateTime endAt = Optional.ofNullable(countryPinRequest).map(CountryPinRequest::getEndAt).orElse(null);
         Boolean alarmEnabled = Optional.ofNullable(countryPinRequest).map(CountryPinRequest::getAlarmEnabled).orElse(null);
 
         MemberCountry memberCountry = memberCountryRepository.findByMemberAndCountry(member, country)
-                .map(it -> it.update(beginAt, endAt, alarmEnabled))
-                .orElseGet(() -> MemberCountry.builder()
-                        .member(member)
-                        .country(country)
-                        .beginAt(beginAt)
-                        .endAt(endAt)
-                        .alarmEnabled(alarmEnabled)
-                        .build()
-                );
+                                                             .map(it -> it.update(beginAt, endAt, alarmEnabled))
+                                                             .orElseGet(() -> MemberCountry.builder()
+                                                                                           .member(member)
+                                                                                           .country(country)
+                                                                                           .beginAt(beginAt)
+                                                                                           .endAt(endAt)
+                                                                                           .alarmEnabled(alarmEnabled)
+                                                                                           .build()
+                                                             );
         memberCountryRepository.save(memberCountry);
         return countryAssembler.toCountryDetailResponse(member, country);
     }
@@ -81,8 +93,8 @@ public class CountryApplicationService {
     ) {
         Member member = memberService.getMember(memberId);
         Country country = countryService.getCountry(countryId)
-                .orElseThrow(CountryNotFoundException::new);
+                                        .orElseThrow(CountryNotFoundException::new);
         memberCountryRepository.findByMemberAndCountry(member, country)
-                .ifPresent(memberCountryRepository::delete);
+                               .ifPresent(memberCountryRepository::delete);
     }
 }

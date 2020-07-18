@@ -59,15 +59,15 @@ public class CovidFetchServiceImpl implements CovidFetchService {
         parameterMap.put("endCreateDt", Collections.singletonList(formattedDate));
 
         URI requestUrl = UriComponentsBuilder.fromHttpUrl(publicApiHost)
-                .path(publicApiCovidListPath)
-                .queryParams(parameterMap)
-                .build(true)
-                .toUri();
+                                             .path(publicApiCovidListPath)
+                                             .queryParams(parameterMap)
+                                             .build(true)
+                                             .toUri();
         ResponseEntity<Map> responseEntity = publicApiRestTemplate.exchange(
                 new RequestEntity<>(HttpMethod.GET, requestUrl), Map.class
         );
         if (!responseEntity.getStatusCode()
-                .is2xxSuccessful() || responseEntity.getBody() == null) {
+                           .is2xxSuccessful() || responseEntity.getBody() == null) {
             log.error("Failed to get covid information. statusCode:" + responseEntity.getStatusCode());
             throw new ContactApiFailedException("Failed to get covid information. statusCode:" + responseEntity.getStatusCode());
         }
@@ -80,11 +80,15 @@ public class CovidFetchServiceImpl implements CovidFetchService {
         try {
             Map<String, Object> responseMap = (Map<String, Object>) resultMap.get("response");
             Map<String, Object> bodyMap = (Map<String, Object>) responseMap.get("body");
+            Integer totalCount = (int) bodyMap.get("totalCount");
+            if (totalCount == 0) {
+                return Collections.emptyList();
+            }
             Map<String, Object> itemsMap = (Map<String, Object>) bodyMap.get("items");
             List<Map<String, Object>> itemList = (List<Map<String, Object>>) itemsMap.get("item");
             return itemList.stream()
-                    .map(this::toCovidFetchValue)
-                    .collect(Collectors.toList());
+                           .map(this::toCovidFetchValue)
+                           .collect(Collectors.toList());
         } catch (ClassCastException ex) {
             log.error("Failed to resolve CovidFetchValue. resultMap:{}", resultMap, ex);
             return Collections.emptyList();
@@ -98,7 +102,7 @@ public class CovidFetchServiceImpl implements CovidFetchService {
         return new CovidFetchValueImpl(
                 LocalDateTime.parse(
                         this.parseDateTime(
-                            PublicApiUtils.get(covidFetchMap, "createDt")
+                                PublicApiUtils.get(covidFetchMap, "createDt")
                         ),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 ),
@@ -121,9 +125,9 @@ public class CovidFetchServiceImpl implements CovidFetchService {
         List<CovidFetchValue> resultValues = new ArrayList<>();
         for (CovidFetchValue currentValue : currentValues) {
             CovidFetchValue pastValue = pastValues.stream()
-                    .filter(it -> it.getCountryName().equals(currentValue.getCountryName()))
-                    .findFirst()
-                    .orElse(null);
+                                                  .filter(it -> it.getCountryName().equals(currentValue.getCountryName()))
+                                                  .findFirst()
+                                                  .orElse(null);
             if (pastValue == null) {
                 resultValues.add(
                         new CovidFetchValueImpl(

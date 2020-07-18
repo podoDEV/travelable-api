@@ -1,11 +1,14 @@
 package world.podo.emergency.ui.web;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import world.podo.emergency.domain.country.*;
+import world.podo.emergency.domain.country.CovidFetchService;
+import world.podo.emergency.domain.country.CovidFetchValue;
+import world.podo.emergency.domain.notice.NoticeFetchDetailValue;
+import world.podo.emergency.domain.notice.NoticeFetchService;
+import world.podo.emergency.domain.notice.NoticeFetchSimpleValue;
 import world.podo.emergency.infrastructure.public_api.PublicApiCountryIsoCodeUtils;
 
 import java.time.LocalDate;
@@ -61,7 +64,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SampleResponse {
+public class CountryResponse {
     private Long id;
     @JsonProperty("names")
     private NamesResponse namesResponse;
@@ -81,13 +84,13 @@ public class SampleResponse {
     private LocalDateTime beginAt;
     private LocalDateTime endAt;
 
-    public static SampleResponse ghana(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
+    public static CountryResponse ghana(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
         CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
-                .filter(it -> "가나".equals(it.getCountryName()))
-                .findFirst()
-                .orElse(null);
+                                                           .filter(it -> "가나".equals(it.getCountryName()))
+                                                           .findFirst()
+                                                           .orElse(null);
 
-        return new SampleResponse(
+        return new CountryResponse(
                 ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
                 new NamesResponse(
                         "가나",
@@ -128,10 +131,10 @@ public class SampleResponse {
                 noticeFetchService.fetchByCountryCode(
                         PublicApiCountryIsoCodeUtils.getIsoCode("가나")
                 ).stream()
-                        .map(NoticeFetchSimpleValue::getId)
-                        .map(noticeFetchService::fetchOne)
-                        .map(SampleResponse::toNoticeResponse)
-                        .collect(Collectors.toList()),
+                                  .map(NoticeFetchSimpleValue::getId)
+                                  .map(noticeFetchService::fetchOne)
+                                  .map(CountryResponse::toNoticeResponse)
+                                  .collect(Collectors.toList()),
                 ThreadLocalRandom.current().nextInt(5),
                 ThreadLocalRandom.current().nextBoolean(),
                 toCovidResponse(covidFetchValue),
@@ -142,13 +145,13 @@ public class SampleResponse {
         );
     }
 
-    public static SampleResponse gabon(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
+    public static CountryResponse gabon(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
         CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
-                .filter(it -> "가봉".equals(it.getCountryName()))
-                .findFirst()
-                .orElse(null);
+                                                           .filter(it -> "가봉".equals(it.getCountryName()))
+                                                           .findFirst()
+                                                           .orElse(null);
 
-        return new SampleResponse(
+        return new CountryResponse(
                 ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
                 new NamesResponse(
                         "가봉",
@@ -175,10 +178,10 @@ public class SampleResponse {
                 noticeFetchService.fetchByCountryCode(
                         PublicApiCountryIsoCodeUtils.getIsoCode("가봉")
                 ).stream()
-                        .map(NoticeFetchSimpleValue::getId)
-                        .map(noticeFetchService::fetchOne)
-                        .map(SampleResponse::toNoticeResponse)
-                        .collect(Collectors.toList()),
+                                  .map(NoticeFetchSimpleValue::getId)
+                                  .map(noticeFetchService::fetchOne)
+                                  .map(CountryResponse::toNoticeResponse)
+                                  .collect(Collectors.toList()),
                 ThreadLocalRandom.current().nextInt(5),
                 ThreadLocalRandom.current().nextBoolean(),
                 toCovidResponse(covidFetchValue),
@@ -189,13 +192,13 @@ public class SampleResponse {
         );
     }
 
-    public static SampleResponse guyana(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
+    public static CountryResponse guyana(CovidFetchService covidFetchService, NoticeFetchService noticeFetchService) {
         CovidFetchValue covidFetchValue = covidFetchService.fetch(LocalDate.now()).stream()
-                .filter(it -> "가이아나공화국".equals(it.getCountryName()))
-                .findFirst()
-                .orElse(null);
+                                                           .filter(it -> "가이아나공화국".equals(it.getCountryName()))
+                                                           .findFirst()
+                                                           .orElse(null);
 
-        return new SampleResponse(
+        return new CountryResponse(
                 ThreadLocalRandom.current().nextLong(0, Long.MAX_VALUE),
                 new NamesResponse(
                         "가이아나공화국",
@@ -236,10 +239,10 @@ public class SampleResponse {
                 noticeFetchService.fetchByCountryCode(
                         PublicApiCountryIsoCodeUtils.getIsoCode("가이아나공화국")
                 ).stream()
-                        .map(NoticeFetchSimpleValue::getId)
-                        .map(noticeFetchService::fetchOne)
-                        .map(SampleResponse::toNoticeResponse)
-                        .collect(Collectors.toList()),
+                                  .map(NoticeFetchSimpleValue::getId)
+                                  .map(noticeFetchService::fetchOne)
+                                  .map(CountryResponse::toNoticeResponse)
+                                  .collect(Collectors.toList()),
                 ThreadLocalRandom.current().nextInt(5),
                 ThreadLocalRandom.current().nextBoolean(),
                 toCovidResponse(covidFetchValue),
@@ -280,28 +283,4 @@ public class SampleResponse {
         );
     }
 
-    @Data
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class NamesResponse {
-        private String ko;
-        private String en;
-    }
-
-    @Data
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class TelResponse {
-        @JsonProperty("names")
-        private NamesResponse namesResponse;
-        private String value;
-    }
-
-    @Data
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class EmbassyResponse {
-        private String address;
-        private String email;
-        private String representativeNumber;
-        private String emergencyNumber;
-        private String description;
-    }
 }
