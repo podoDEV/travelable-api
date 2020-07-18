@@ -1,13 +1,11 @@
 package world.podo.travelable.ui.web;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@Builder
 public class EmbassyResponse {
     private String address;
     private String email;

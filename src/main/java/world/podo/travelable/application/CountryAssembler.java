@@ -10,10 +10,7 @@ import world.podo.travelable.domain.member.MemberCountry;
 import world.podo.travelable.domain.member.MemberCountryId;
 import world.podo.travelable.domain.member.MemberCountryRepository;
 import world.podo.travelable.domain.notice.Notice;
-import world.podo.travelable.ui.web.CountryDetailResponse;
-import world.podo.travelable.ui.web.CountryResponse;
-import world.podo.travelable.ui.web.CountrySimpleResponse;
-import world.podo.travelable.ui.web.NamesResponse;
+import world.podo.travelable.ui.web.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +49,8 @@ class CountryAssembler {
     }
 
     CountryResponse toCountryResponse(Member member, Country country, List<Notice> notices, CovidFetchValue covidFetchValue) {
+        Contact contact = country.getContact();
+
         CountryResponse countryResponse = new CountryResponse();
         countryResponse.setId(country.getCountryId());
         countryResponse.setNamesResponse(
@@ -69,6 +68,17 @@ class CountryAssembler {
         );
 //        countryResponse.setPrecautionLevel();
 //        countryResponse.setTravelAdvisory(false);
+        if (contact != null) {
+            countryResponse.setEmbassyResponse(
+                    EmbassyResponse.builder()
+                                   .address(contact.getEmbassyAddress())
+                                   .email(contact.getEmbassyEmail())
+                                   .description(contact.getEmbassyDescription())
+                                   .emergencyNumber(contact.getEmbassyEmergencyNumber())
+                                   .representativeNumber(contact.getEmbassyRepresentationNumber())
+                                   .build()
+            );
+        }
         countryResponse.setCovidResponse(
                 covidAssembler.toCovidResponse(covidFetchValue)
         );
