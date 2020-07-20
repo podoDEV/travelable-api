@@ -47,6 +47,7 @@ public class Contact {
     private String embassyEmail;
     private String embassyRepresentationNumber;
     private String embassyEmergencyNumber;
+    @Lob
     private String embassyDescription;
     @CreatedDate
     private LocalDateTime createdAt;
