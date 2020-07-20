@@ -28,7 +28,7 @@ public class TelResponse {
 
     public static TelResponse police(String policeNumber) {
         return new TelResponse(
-                NamesResponse.police(),
+                NamesResponse.ambulance(),
                 policeNumber
         );
     }
