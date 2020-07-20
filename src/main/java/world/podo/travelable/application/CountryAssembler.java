@@ -79,6 +79,9 @@ class CountryAssembler {
                                    .representativeNumber(contact.getEmbassyRepresentationNumber())
                                    .build()
             );
+            if (contact.getCountryNumber() != null) {
+                countryResponse.setCountryNumber(contact.getCountryNumber());
+            }
             List<TelResponse> telResponses = new ArrayList<>();
             if (contact.getPoliceNumber() != null) {
                 telResponses.add(TelResponse.police(contact.getPoliceNumber()));
