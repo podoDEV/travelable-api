@@ -1,6 +1,6 @@
 package world.podo.travelable.application;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ import world.podo.travelable.domain.member.MemberCountry;
 import world.podo.travelable.domain.member.MemberCountryRepository;
 import world.podo.travelable.domain.member.MemberService;
 import world.podo.travelable.domain.notice.NoticeRepository;
+import world.podo.travelable.infrastructure.public_api.CacheableCovidFetchService;
 import world.podo.travelable.ui.web.CountryDetailResponse;
 import world.podo.travelable.ui.web.CountryPinRequest;
 import world.podo.travelable.ui.web.CountryResponse;
@@ -25,7 +26,6 @@ import java.util.Optional;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class CountryApplicationService {
     private final CountryService countryService;
     private final MemberService memberService;
@@ -33,6 +33,21 @@ public class CountryApplicationService {
     private final CountryAssembler countryAssembler;
     private final NoticeRepository noticeRepository;
     private final CovidFetchService covidFetchService;
+
+    public CountryApplicationService(
+            CountryService countryService,
+            MemberService memberService,
+            MemberCountryRepository memberCountryRepository,
+            CountryAssembler countryAssembler,
+            NoticeRepository noticeRepository,
+            @Qualifier(CacheableCovidFetchService.BEAN_NAME) CovidFetchService covidFetchService) {
+        this.countryService = countryService;
+        this.memberService = memberService;
+        this.memberCountryRepository = memberCountryRepository;
+        this.countryAssembler = countryAssembler;
+        this.noticeRepository = noticeRepository;
+        this.covidFetchService = covidFetchService;
+    }
 
     public Page<CountryResponse> getCountries(Long memberId, Boolean pinned, Pageable pageable) {
         Assert.notNull(memberId, "'memberId' must not be null");

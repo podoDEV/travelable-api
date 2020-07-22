@@ -26,8 +26,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service
+@Service(CovidFetchServiceImpl.BEAN_NAME)
 public class CovidFetchServiceImpl implements CovidFetchService {
+    public static final String BEAN_NAME = "covidFetchServiceImpl";
+
     private final RestTemplate publicApiRestTemplate;
     private final String publicApiHost;
     private final String publicApiCovidListPath;
