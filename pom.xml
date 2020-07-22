@@ -19,6 +19,7 @@
         <swagger.version>2.9.2</swagger.version>
         <java-jwt.version>3.8.3</java-jwt.version>
         <firebase.admin.version>6.13.0</firebase.admin.version>
+        <guava.version>29.0-android</guava.version>
     </properties>
 
     <dependencies>
@@ -99,6 +100,11 @@
             <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>
             <version>${firebase.admin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 
