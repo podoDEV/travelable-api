@@ -8,6 +8,7 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
+@Setter
 @Getter
 @ToString
 @EqualsAndHashCode
