@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberCountryId implements Serializable {
     private static final long serialVersionUID = 1729839338332735726L;
