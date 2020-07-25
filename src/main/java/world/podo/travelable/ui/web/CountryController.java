@@ -67,8 +67,12 @@ public class CountryController {
             @RequestHeader("Authorization") String authorization,
             @ApiIgnore @ModelAttribute("memberId") Long memberId,
             @PathVariable Long countryId,
-            @RequestBody CountryPinRequest countryPinRequest
+            @RequestBody(required = false) CountryPinRequest countryPinRequest
     ) {
+        if (countryPinRequest == null) {
+            // set default value
+            countryPinRequest = new CountryPinRequest();
+        }
         CountryDetailResponse countryDetailResponse = countryApplicationService.pinCountry(memberId, countryId, countryPinRequest);
         return ResponseEntity.ok(
                 ApiResponse.data(countryDetailResponse)

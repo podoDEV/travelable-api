@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class CountryPinRequest {
-    private LocalDateTime beginAt;
-    private LocalDateTime endAt;
+    private LocalDateTime beginAt = LocalDateTime.MIN;
+    private LocalDateTime endAt = LocalDateTime.MAX;
     private Boolean alarmEnabled = Boolean.TRUE;
 }
