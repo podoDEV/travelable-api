@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.util.Assert;
 import world.podo.travelable.domain.country.Country;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class MemberCountryId implements Serializable {
     private static final long serialVersionUID = 1729839338332735726L;
 
