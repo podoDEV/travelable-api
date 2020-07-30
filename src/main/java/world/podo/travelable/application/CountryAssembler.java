@@ -7,7 +7,6 @@ import world.podo.travelable.domain.country.Country;
 import world.podo.travelable.domain.country.CovidFetchValue;
 import world.podo.travelable.domain.member.Member;
 import world.podo.travelable.domain.member.MemberCountry;
-import world.podo.travelable.domain.member.MemberCountryId;
 import world.podo.travelable.domain.member.MemberCountryRepository;
 import world.podo.travelable.domain.notice.Notice;
 import world.podo.travelable.ui.web.*;
@@ -31,7 +30,7 @@ class CountryAssembler {
         CountrySimpleResponse countrySimpleResponse = new CountrySimpleResponse();
         countrySimpleResponse.setId(country.getCountryId());
         countrySimpleResponse.setName(country.getName());
-        countrySimpleResponse.setPinned(memberCountryRepository.existsById(MemberCountryId.of(member, country)));
+        countrySimpleResponse.setPinned(memberCountryRepository.existsByMemberAndCountry(member, country));
         return countrySimpleResponse;
     }
 
@@ -42,7 +41,7 @@ class CountryAssembler {
         CountryDetailResponse countryDetailResponse = new CountryDetailResponse();
         countryDetailResponse.setId(country.getCountryId());
         countryDetailResponse.setName(country.getName());
-        countryDetailResponse.setPinned(memberCountryRepository.existsById(MemberCountryId.of(member, country)));
+        countryDetailResponse.setPinned(memberCountryRepository.existsByMemberAndCountry(member, country));
         countryDetailResponse.setContact(Optional.ofNullable(country.getContact())
                                                  .map(Contact::getValue)
                                                  .orElse(null));

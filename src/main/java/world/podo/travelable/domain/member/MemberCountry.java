@@ -27,8 +27,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EntityListeners(AuditingEntityListener.class)
 public class MemberCountry {
-    @EmbeddedId
-    private MemberCountryId memberCountryId;
+    @Id
+    @GeneratedValue
+    private Long memberCountryId;
     /**
      * 구독 시작 시각
      */
@@ -46,12 +47,12 @@ public class MemberCountry {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @MapsId("countryId")
     @ManyToOne
+    @JoinColumn(name = "countryId")
     private Country country;
 
-    @MapsId("memberId")
     @ManyToOne
+    @JoinColumn(name = "memberId")
     private Member member;
 
     public MemberCountry update(

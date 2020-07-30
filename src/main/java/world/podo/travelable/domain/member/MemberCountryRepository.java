@@ -7,7 +7,9 @@ import world.podo.travelable.domain.country.Country;
 
 import java.util.Optional;
 
-public interface MemberCountryRepository extends JpaRepository<MemberCountry, MemberCountryId> {
+public interface MemberCountryRepository extends JpaRepository<MemberCountry, Long> {
+    boolean existsByMemberAndCountry(Member member, Country country);
+
     Page<MemberCountry> findByMember_memberId(Long memberId, Pageable pageable);
 
     Optional<MemberCountry> findByMemberAndCountry(Member member, Country country);
