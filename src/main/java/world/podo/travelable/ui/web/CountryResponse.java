@@ -103,6 +103,7 @@ public class CountryResponse {
                                         "경찰",
                                         "Police"
                                 ),
+                                "police",
                                 "191"
                         ),
                         new TelResponse(
@@ -110,6 +111,7 @@ public class CountryResponse {
                                         "소방서",
                                         "Fire station"
                                 ),
+                                "fireStation",
                                 "192/999"
                         ),
                         new TelResponse(
@@ -117,6 +119,7 @@ public class CountryResponse {
                                         "앰뷸런스",
                                         "Ambulance"
                                 ),
+                                "ambulance",
                                 "193"
                         )
                 ),
@@ -164,6 +167,7 @@ public class CountryResponse {
                                         "경찰",
                                         "Police"
                                 ),
+                                "police",
                                 "177"
                         )
                 ),
@@ -211,6 +215,7 @@ public class CountryResponse {
                                         "경찰",
                                         "Police"
                                 ),
+                                "police",
                                 "911"
                         ),
                         new TelResponse(
@@ -218,6 +223,7 @@ public class CountryResponse {
                                         "소방서",
                                         "Fire station"
                                 ),
+                                "fireStation",
                                 "912"
                         ),
                         new TelResponse(
@@ -225,6 +231,7 @@ public class CountryResponse {
                                         "앰뷸런스",
                                         "Ambulance"
                                 ),
+                                "ambulance",
                                 "913"
                         )
                 ),
