@@ -32,3 +32,4 @@ build/
 
 application-local.properties
 emergency-aacad-6cd9330f1240.json
+/src/main/resources/application-dev.properties
