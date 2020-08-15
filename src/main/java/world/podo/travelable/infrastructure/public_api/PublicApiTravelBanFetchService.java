@@ -19,8 +19,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service
+@Service(PublicApiTravelBanFetchService.BEAN_NAME)
 public class PublicApiTravelBanFetchService implements TravelBanFetchService {
+    public static final String BEAN_NAME = "publicApiTravelBanFetchService";
+
     private final RestTemplate publicApiRestTemplate;
     private final String publicApiHost;
     private final String publicApiTravelBanListPath;

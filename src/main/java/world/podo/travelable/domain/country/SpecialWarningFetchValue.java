@@ -16,4 +16,9 @@ package world.podo.travelable.domain.country;
  */
 public interface SpecialWarningFetchValue {
     String getId();
+
+    /**
+     * 특별 여행 주의보 상태인지.
+     */
+    boolean isTravelAdvisory();
 }

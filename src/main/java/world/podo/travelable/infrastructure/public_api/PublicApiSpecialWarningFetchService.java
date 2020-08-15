@@ -19,8 +19,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service
+@Service(PublicApiSpecialWarningFetchService.BEAN_NAME)
 public class PublicApiSpecialWarningFetchService implements SpecialWarningFetchService {
+    public static final String BEAN_NAME = "publicApiSpecialWarningFetchService";
+
     private final RestTemplate publicApiRestTemplate;
     private final String publicApiHost;
     private final String publicApiSpecialWarningListPath;
