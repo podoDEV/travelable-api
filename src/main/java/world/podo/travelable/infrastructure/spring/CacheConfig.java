@@ -33,7 +33,13 @@ public class CacheConfig {
     }
 
     public enum CacheName {
-        COVID;
+        COVID,
+        WARNING_LIST,
+        WARNING_INFO,
+        TRAVEL_BAN_LIST,
+        TRAVEL_BAN_INFO,
+        SPECIAL_WARNING_LIST,
+        SPECIAL_WARNING_INFO;
 
         public static String[] names() {
             return Arrays.stream(values())

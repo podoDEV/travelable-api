@@ -2,22 +2,22 @@ package world.podo.travelable.domain.country;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-import world.podo.travelable.infrastructure.public_api.PublicApiSpecialWarningFetchService;
-import world.podo.travelable.infrastructure.public_api.PublicApiTravelBanFetchService;
-import world.podo.travelable.infrastructure.public_api.PublicApiWarningFetchService;
+import world.podo.travelable.domain.DomainService;
+import world.podo.travelable.infrastructure.public_api.CacheableSpecialWarningFetchService;
+import world.podo.travelable.infrastructure.public_api.CacheableTravelBanFetchService;
+import world.podo.travelable.infrastructure.public_api.CacheableWarningFetchService;
 
 @Slf4j
-@Service
+@DomainService
 public class PrecautionLevelService {
     private final WarningFetchService warningFetchService;
     private final TravelBanFetchService travelBanFetchService;
     private final SpecialWarningFetchService specialWarningFetchService;
 
     public PrecautionLevelService(
-            @Qualifier(PublicApiWarningFetchService.BEAN_NAME) WarningFetchService warningFetchService,
-            @Qualifier(PublicApiTravelBanFetchService.BEAN_NAME) TravelBanFetchService travelBanFetchService,
-            @Qualifier(PublicApiSpecialWarningFetchService.BEAN_NAME) SpecialWarningFetchService specialWarningFetchService) {
+            @Qualifier(CacheableWarningFetchService.BEAN_NAME) WarningFetchService warningFetchService,
+            @Qualifier(CacheableTravelBanFetchService.BEAN_NAME) TravelBanFetchService travelBanFetchService,
+            @Qualifier(CacheableSpecialWarningFetchService.BEAN_NAME) SpecialWarningFetchService specialWarningFetchService) {
         this.warningFetchService = warningFetchService;
         this.travelBanFetchService = travelBanFetchService;
         this.specialWarningFetchService = specialWarningFetchService;
