@@ -1,18 +1,18 @@
 package world.podo.travelable.domain.country;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import world.podo.travelable.infrastructure.public_api.PublicApiSpecialWarningFetchService;
+import world.podo.travelable.domain.DomainService;
+import world.podo.travelable.infrastructure.public_api.CacheableSpecialWarningFetchService;
 
 import java.util.Objects;
 
-@Service
+@DomainService
 public class TravelAdvisoryService {
     private final SpecialWarningFetchService specialWarningFetchService;
 
     public TravelAdvisoryService(
-            @Qualifier(PublicApiSpecialWarningFetchService.BEAN_NAME) SpecialWarningFetchService specialWarningFetchService
+            @Qualifier(CacheableSpecialWarningFetchService.BEAN_NAME) SpecialWarningFetchService specialWarningFetchService
     ) {
         this.specialWarningFetchService = specialWarningFetchService;
     }
