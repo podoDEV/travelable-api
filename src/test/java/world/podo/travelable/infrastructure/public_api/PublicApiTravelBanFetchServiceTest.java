@@ -3,8 +3,10 @@ package world.podo.travelable.infrastructure.public_api;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import world.podo.travelable.domain.country.TravelBanFetchService;
 import world.podo.travelable.domain.country.TravelBanFetchValue;
 
 import java.util.List;
@@ -13,7 +15,8 @@ import java.util.List;
 @SpringBootTest
 class PublicApiTravelBanFetchServiceTest {
     @Autowired
-    private PublicApiTravelBanFetchService sut;
+    @Qualifier(PublicApiTravelBanFetchService.BEAN_NAME)
+    private TravelBanFetchService sut;
 
     @Ignore
     @Test
