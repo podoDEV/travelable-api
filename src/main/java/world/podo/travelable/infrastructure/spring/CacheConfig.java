@@ -27,7 +27,7 @@ public class CacheConfig {
                                     .expireAfterWrite(2L, TimeUnit.DAYS)
                                     .build()
                                     .asMap(),
-                        false);
+                        true);
             }
         };
     }
