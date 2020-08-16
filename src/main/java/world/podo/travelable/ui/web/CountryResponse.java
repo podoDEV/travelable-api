@@ -75,7 +75,7 @@ public class CountryResponse {
     private EmbassyResponse embassyResponse;
     private String link;
     private List<NoticeResponse> notices;
-    private Integer precautionLevel;
+    private String precautionLevel;
     private Boolean travelAdvisory;
     @JsonProperty("covid")
     private CovidResponse covidResponse;
@@ -138,7 +138,7 @@ public class CountryResponse {
                                   .map(noticeFetchService::fetchOne)
                                   .map(CountryResponse::toNoticeResponse)
                                   .collect(Collectors.toList()),
-                ThreadLocalRandom.current().nextInt(5),
+                "none",
                 ThreadLocalRandom.current().nextBoolean(),
                 toCovidResponse(covidFetchValue),
                 ThreadLocalRandom.current().nextBoolean(),
@@ -186,7 +186,7 @@ public class CountryResponse {
                                   .map(noticeFetchService::fetchOne)
                                   .map(CountryResponse::toNoticeResponse)
                                   .collect(Collectors.toList()),
-                ThreadLocalRandom.current().nextInt(5),
+                "none",
                 ThreadLocalRandom.current().nextBoolean(),
                 toCovidResponse(covidFetchValue),
                 ThreadLocalRandom.current().nextBoolean(),
@@ -250,7 +250,7 @@ public class CountryResponse {
                                   .map(noticeFetchService::fetchOne)
                                   .map(CountryResponse::toNoticeResponse)
                                   .collect(Collectors.toList()),
-                ThreadLocalRandom.current().nextInt(5),
+                "none",
                 ThreadLocalRandom.current().nextBoolean(),
                 toCovidResponse(covidFetchValue),
                 ThreadLocalRandom.current().nextBoolean(),

@@ -23,6 +23,21 @@ public class WarningFetchValueImpl implements WarningFetchValue {
     private String limitaPartial;
     private String limitaNote;
 
+    @Override
+    public boolean isUsual() {
+        return "여행유의".equals(attention) || "여행유의(일부)".equals(attentionPartial);
+    }
+
+    @Override
+    public boolean isEnhanced() {
+        return "여행자제".equals(control) || "여행자제(일부)".equals(control);
+    }
+
+    @Override
+    public boolean isAvoidNonessential() {
+        return "여행제한".equals(limita) || "여행제한(일부)".equals(limita);
+    }
+
     enum FieldName implements FieldNameSupport {
         ID("id", "인덱스"),
         ATTENTION("attention", "여행유의"),
@@ -45,7 +60,7 @@ public class WarningFetchValueImpl implements WarningFetchValue {
 
         @Override
         public String getFieldName() {
-            return null;
+            return value;
         }
     }
 }

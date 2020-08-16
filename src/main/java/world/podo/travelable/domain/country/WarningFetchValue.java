@@ -17,7 +17,18 @@ package world.podo.travelable.domain.country;
 public interface WarningFetchValue {
     String getId();
 
-    String getLimitaNote();
+    /**
+     * practice usual precautions(여행 주의)
+     */
+    boolean isUsual();
 
-    String getLimitaPartial();
+    /**
+     * practice enhanced precautions(여행 자제)
+     */
+    boolean isEnhanced();
+
+    /**
+     * avoid non-essential precautions(철수 권고)
+     */
+    boolean isAvoidNonessential();
 }

@@ -2,10 +2,7 @@ package world.podo.travelable.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import world.podo.travelable.domain.country.Contact;
-import world.podo.travelable.domain.country.Country;
-import world.podo.travelable.domain.country.CovidFetchValue;
-import world.podo.travelable.domain.country.TravelAdvisoryService;
+import world.podo.travelable.domain.country.*;
 import world.podo.travelable.domain.member.Member;
 import world.podo.travelable.domain.member.MemberCountry;
 import world.podo.travelable.domain.member.MemberCountryRepository;
@@ -24,6 +21,7 @@ class CountryAssembler {
     private final NoticeAssembler noticeAssembler;
     private final CovidAssembler covidAssembler;
     private final TravelAdvisoryService travelAdvisoryService;
+    private final PrecautionLevelService precautionLevelService;
 
     CountrySimpleResponse toCountrySimpleResponse(Member member, Country country) {
         if (country == null) {
@@ -66,7 +64,8 @@ class CountryAssembler {
                        .map(noticeAssembler::toNoticeResponse)
                        .collect(Collectors.toList())
         );
-//        countryResponse.setPrecautionLevel();
+        countryResponse.setPrecautionLevel(precautionLevelService.getPrecautionLevel(country.getProviderCountryId())
+                                                                 .getDisplayValue());
         countryResponse.setTravelAdvisory(travelAdvisoryService.isTravelAdvisory(country.getProviderCountryId()));
         if (contact != null) {
             countryResponse.setEmbassyResponse(
