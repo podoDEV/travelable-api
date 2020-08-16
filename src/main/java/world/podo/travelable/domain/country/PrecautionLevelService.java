@@ -3,6 +3,7 @@ package world.podo.travelable.domain.country;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import world.podo.travelable.infrastructure.public_api.PublicApiSpecialWarningFetchService;
 import world.podo.travelable.infrastructure.public_api.PublicApiTravelBanFetchService;
 import world.podo.travelable.infrastructure.public_api.PublicApiWarningFetchService;
 
@@ -11,19 +12,26 @@ import world.podo.travelable.infrastructure.public_api.PublicApiWarningFetchServ
 public class PrecautionLevelService {
     private final WarningFetchService warningFetchService;
     private final TravelBanFetchService travelBanFetchService;
+    private final SpecialWarningFetchService specialWarningFetchService;
 
     public PrecautionLevelService(
             @Qualifier(PublicApiWarningFetchService.BEAN_NAME) WarningFetchService warningFetchService,
-            @Qualifier(PublicApiTravelBanFetchService.BEAN_NAME) TravelBanFetchService travelBanFetchService
-    ) {
+            @Qualifier(PublicApiTravelBanFetchService.BEAN_NAME) TravelBanFetchService travelBanFetchService,
+            @Qualifier(PublicApiSpecialWarningFetchService.BEAN_NAME) SpecialWarningFetchService specialWarningFetchService) {
         this.warningFetchService = warningFetchService;
         this.travelBanFetchService = travelBanFetchService;
+        this.specialWarningFetchService = specialWarningFetchService;
     }
 
     public PrecautionLevel getPrecautionLevel(String providerCountryId) {
         if (travelBanFetchService.fetchOne(providerCountryId)
                                  .isPresent()) {
             return PrecautionLevel.AVOID_ALL;
+        }
+        if (specialWarningFetchService.fetchOne(providerCountryId)
+                                      .map(SpecialWarningFetchValue::isTravelAdvisory)
+                                      .isPresent()) {
+            return PrecautionLevel.AVOID_NONESSENTIAL;
         }
         return warningFetchService.fetchOne(providerCountryId)
                                   .map(it -> {

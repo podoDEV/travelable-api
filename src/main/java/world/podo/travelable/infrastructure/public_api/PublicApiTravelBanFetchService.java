@@ -78,7 +78,6 @@ public class PublicApiTravelBanFetchService implements TravelBanFetchService {
             log.error("Failed to get travel ban info data. statusCode:" + responseEntity.getStatusCode());
             throw new CountryApiFailedException("Failed to get travel ban info data. statusCode:" + responseEntity.getStatusCode());
         }
-        log.info("ResponseBody:" + responseEntity.getBody());
         return Optional.ofNullable(
                 this.resolveInfo(responseEntity.getBody())
         );

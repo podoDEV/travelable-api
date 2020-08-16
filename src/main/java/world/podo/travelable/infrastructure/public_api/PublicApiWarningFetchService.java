@@ -75,10 +75,9 @@ public class PublicApiWarningFetchService implements WarningFetchService {
         );
         if (!responseEntity.getStatusCode()
                            .is2xxSuccessful() || responseEntity.getBody() == null) {
-            log.error("Failed to get travel ban info data. statusCode:" + responseEntity.getStatusCode());
-            throw new CountryApiFailedException("Failed to get travel ban info data. statusCode:" + responseEntity.getStatusCode());
+            log.error("Failed to get warning info data. statusCode:" + responseEntity.getStatusCode());
+            throw new CountryApiFailedException("Failed to get warning info data. statusCode:" + responseEntity.getStatusCode());
         }
-        log.info("ResponseBody:" + responseEntity.getBody());
         return Optional.ofNullable(
                 this.resolveInfo(responseEntity.getBody())
         );
@@ -124,7 +123,6 @@ public class PublicApiWarningFetchService implements WarningFetchService {
         if (warningFetchMap == null) {
             return null;
         }
-        System.out.println(warningFetchMap);
         return new WarningFetchValueImpl(
                 PublicApiUtils.get(warningFetchMap, WarningFetchValueImpl.FieldName.ID),
                 PublicApiUtils.get(warningFetchMap, WarningFetchValueImpl.FieldName.ATTENTION),
