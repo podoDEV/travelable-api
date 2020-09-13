@@ -10,27 +10,6 @@ public class NoticeSynchronizationService {
     private final NoticeFactory noticeFactory;
     private final NoticeRepository noticeRepository;
 
-    public Notice synchronize(NoticeFetchDetailValue noticeFetchDetailValue) {
-        if (noticeFetchDetailValue == null) {
-            return null;
-        }
-        return noticeRepository.findByProviderNoticeId(noticeFetchDetailValue.getId())
-                               .map(notice -> notice.update(
-                                       noticeFetchDetailValue.getId(),
-                                       noticeFetchDetailValue.getTitle(),
-                                       noticeFetchDetailValue.getTextContent(),
-                                       noticeFetchDetailValue.getHtmlContent(),
-                                       noticeFetchDetailValue.getWrittenDate()
-                               ))
-                               .orElseGet(() -> noticeFactory.create(
-                                       noticeFetchDetailValue.getId(),
-                                       noticeFetchDetailValue.getTitle(),
-                                       noticeFetchDetailValue.getTextContent(),
-                                       noticeFetchDetailValue.getHtmlContent(),
-                                       noticeFetchDetailValue.getWrittenDate()
-                               ));
-    }
-
     public Notice synchronize(Country country, NoticeFetchDetailValue noticeFetchDetailValue) {
         if (noticeFetchDetailValue == null) {
             return null;
@@ -42,9 +21,9 @@ public class NoticeSynchronizationService {
                                            noticeFetchDetailValue.getTitle(),
                                            noticeFetchDetailValue.getTextContent(),
                                            noticeFetchDetailValue.getHtmlContent(),
-                                           noticeFetchDetailValue.getWrittenDate()
+                                           noticeFetchDetailValue.getWrittenDate(),
+                                           country
                                    );
-                                   notice.setCountry(country);
                                    return notice;
                                })
                                .orElseGet(() -> {
@@ -53,9 +32,9 @@ public class NoticeSynchronizationService {
                                            noticeFetchDetailValue.getTitle(),
                                            noticeFetchDetailValue.getTextContent(),
                                            noticeFetchDetailValue.getHtmlContent(),
-                                           noticeFetchDetailValue.getWrittenDate()
+                                           noticeFetchDetailValue.getWrittenDate(),
+                                           country
                                    );
-                                   notice.setCountry(country);
                                    return notice;
                                });
     }

@@ -18,16 +18,19 @@ public class FirebasePushService implements PushService {
     public void send(PushRequest pushRequest) {
         Assert.notNull(pushRequest, "'pushRequest' must not be null");
 
+        Notification notification = Notification.builder()
+                                                .setTitle(pushRequest.getTitle())
+                                                .setBody(pushRequest.getBody())
+                                                .build();
+
         // This registration token comes from the client FCM SDKs.
         // See documentation on defining a message payload.
         List<Message> messages = pushRequest.getRegistrationTokens().stream()
-                .map(token -> Message.builder()
-                        .setNotification(new Notification(
-                                "title", "body"
-                        ))
-                        .setToken(token)
-                        .build())
-                .collect(Collectors.toList());
+                                            .map(token -> Message.builder()
+                                                                 .setNotification(notification)
+                                                                 .setToken(token)
+                                                                 .build())
+                                            .collect(Collectors.toList());
 
         // Send a message to the device corresponding to the provided registration token.
         BatchResponse batchResponse = null;

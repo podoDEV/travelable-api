@@ -51,7 +51,8 @@ public class Notice {
             String title,
             String textContent,
             String htmlContent,
-            String writtenAt
+            String writtenAt,
+            Country country
     ) {
         if (!this.providerNoticeId.equals(providerNoticeId)) {
             return this;
@@ -70,6 +71,9 @@ public class Notice {
                     writtenAt,
                     DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
             );
+        }
+        if (country != null) {
+            this.country = country;
         }
         return this;
     }

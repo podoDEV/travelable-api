@@ -37,7 +37,7 @@ class PublicApiTravelBanFetchServiceTest {
     @Ignore
     @Test
     void fetchOne() {
-        TravelBanFetchValue value = sut.fetchOne("374")
+        TravelBanFetchValue value = sut.fetchOne("375")
                                        .orElse(null);
         System.out.println(value);
     }
