@@ -46,27 +46,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/api/**")
-                .authorizeRequests()
-                .mvcMatchers(HttpMethod.POST, "/api/inner/**").permitAll()
-                .mvcMatchers(HttpMethod.POST, "/api/members/login").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/api/covids").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/api/sample").permitAll()
-                .anyRequest().authenticated();
+            .authorizeRequests()
+            .mvcMatchers(HttpMethod.POST, "/api/inner/**").permitAll()
+            .mvcMatchers(HttpMethod.POST, "/api/members/login").permitAll()
+            .mvcMatchers(HttpMethod.GET, "/api/covids").permitAll()
+            .mvcMatchers(HttpMethod.GET, "/api/sample").permitAll()
+            .mvcMatchers(HttpMethod.POST, "/api/test/**").permitAll()
+            .anyRequest().authenticated();
 
         http.formLogin().disable();
         http.httpBasic().disable();
 
         http.logout()
-                .logoutSuccessHandler(this.jsonLogoutSuccessHandler())
-                .logoutRequestMatcher(new AntPathRequestMatcher("/api/members/logout", HttpMethod.POST.name()));
+            .logoutSuccessHandler(this.jsonLogoutSuccessHandler())
+            .logoutRequestMatcher(new AntPathRequestMatcher("/api/members/logout", HttpMethod.POST.name()));
 
         http.addFilterAt(this.todoPreAuthenticatedProcessingFilter(), AbstractPreAuthenticatedProcessingFilter.class);
 
         http.addFilterBefore(this.httpPostAuthenticationProcessingFilter(), BasicAuthenticationFilter.class);
 
         http.exceptionHandling()
-                .authenticationEntryPoint(this.jsonAuthenticationEntryPoint())
-                .accessDeniedHandler(this.jsonAccessDeniedHandler());
+            .authenticationEntryPoint(this.jsonAuthenticationEntryPoint())
+            .accessDeniedHandler(this.jsonAccessDeniedHandler());
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
