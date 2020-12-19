@@ -19,7 +19,7 @@ public class TelResponse {
 
     public static TelResponse ambulance(String ambulanceNumber) {
         return new TelResponse(
-                NamesResponse.police(),
+                NamesResponse.ambulance(),
                 KEY_AMBULANCE,
                 ambulanceNumber
         );
@@ -35,7 +35,7 @@ public class TelResponse {
 
     public static TelResponse police(String policeNumber) {
         return new TelResponse(
-                NamesResponse.ambulance(),
+                NamesResponse.police(),
                 KEY_POLICE,
                 policeNumber
         );
